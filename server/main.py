@@ -11,6 +11,7 @@ cors = CORS(app, origins='*')
 
 KEY = "zu-a3482e6ed88b38af358d064805358962"
 VOICERSS_TTS_KEY = "862fba3703124c5d9cfd410aff494ae5"
+X_RAPIDAPI_KEY = "1d9f8aa758msh0f2f642becf4515p1bfb89jsnf70f64195fe4"
 
 @app.route('/api/innovise', methods=['GET'])
 def innovise():
@@ -83,7 +84,7 @@ def tts():
     }
 
     headers = {
-        "X-RapidAPI-Key": "1d9f8aa758msh0f2f642becf4515p1bfb89jsnf70f64195fe4",
+        "X-RapidAPI-Key": X_RAPIDAPI_KEY,
         "X-RapidAPI-Host": "voicerss-text-to-speech.p.rapidapi.com"
     }
 
@@ -92,6 +93,44 @@ def tts():
     audio_data = base64.b64encode(response.content).decode('utf-8')
     audio_player = f"<audio controls='controls'><source src='data:audio/mpeg;base64,{audio_data}'></audio>"
     return audio_player
+
+@app.route('/api/translate-en', methods=["GET", "POST"])
+def translate_en():
+    url = "https://google-translate1.p.rapidapi.com/language/translate/v2"
+
+    payload = {
+        "q": "Kje je knjiznica?",
+        "target": "en",
+        "source": "sl"
+    }
+    headers = {
+        "content-type": "application/x-www-form-urlencoded",
+        "Accept-Encoding": "application/gzip",
+        "X-RapidAPI-Key": X_RAPIDAPI_KEY,
+        "X-RapidAPI-Host": "google-translate1.p.rapidapi.com"
+    }
+
+    response = requests.post(url, data=payload, headers=headers)
+    return response.json()
+
+@app.route('/api/translate-slo', methods=["GET", "POST"])
+def translate_slo():
+    url = "https://google-translate1.p.rapidapi.com/language/translate/v2"
+
+    payload = {
+        "q": "Where is the library?",
+        "target": "sl",
+        "source": "en"
+    }
+    headers = {
+        "content-type": "application/x-www-form-urlencoded",
+        "Accept-Encoding": "application/gzip",
+        "X-RapidAPI-Key": X_RAPIDAPI_KEY,
+        "X-RapidAPI-Host": "google-translate1.p.rapidapi.com"
+    }
+
+    response = requests.post(url, data=payload, headers=headers)
+    return response.json()
 
 if __name__ == "__main__":
     app.run(debug=True, port=8080)
