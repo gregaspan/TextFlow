@@ -2,9 +2,10 @@ from flask import Flask, jsonify, request
 from flask_cors import CORS
 from openai import OpenAI
 from deep_translator import GoogleTranslator
+from serpapi import GoogleSearch
 import requests
-import voicerss_tts
-import assemblyai as aai
+#import voicerss_tts
+#import assemblyai as aai
 import base64
 
 
@@ -17,6 +18,7 @@ VOICERSS_TTS_KEY = "862fba3703124c5d9cfd410aff494ae5"
 ASSEMLBLYAI_STT_KEY = "c6d1e28d398741a7a45554a6fd1d0139"
 X_RAPIDAPI_KEY = "1d9f8aa758msh0f2f642becf4515p1bfb89jsnf70f64195fe4"
 DICTIONARY_API = "GJgVXGJMDDfsC7576edkFw==h7tVsSDr6WCNdoXX"
+IMAGES_API = "2e26df2e32f8642d3ade8783db66d9e8bfa4e0b86283d94ad14011402b4e46e3"
 
 
 @app.route('/api/innovise', methods=['GET'])
@@ -159,9 +161,7 @@ def translate_slo():
 
 @app.route('/api/dictionary', methods=["GET", "POST"])
 def dictionary():
-    translated = GoogleTranslator(source='sl', target='en').translate("slabo") 
-    print(translated)
-
+    translated = GoogleTranslator(source='sl', target='en').translate("avto") 
     
     url = f"https://api.api-ninjas.com/v1/thesaurus?word={translated}"
 
@@ -171,9 +171,19 @@ def dictionary():
 
     neke = requests.get(url, headers=headers).json()["synonyms"]
     tem = []
-    for i in range(5):
-        tem.append(GoogleTranslator(source='en', target='sl').translate(neke[i]))
-    return tem
+    for i in neke:
+        tem.append(GoogleTranslator(source='en', target='sl').translate(i))
 
+    params = {
+        "q": translated,
+        "engine": "google_images",
+        "api_key": IMAGES_API
+    }
+
+    search = GoogleSearch(params)
+    results = search.get_dict()
+    images_results = results["images_results"]
+    return images_results
+    return tem
 if __name__ == "__main__":
     app.run(debug=True, port=8080)
