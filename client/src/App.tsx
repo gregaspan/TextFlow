@@ -1,17 +1,16 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-import CTA from './components/CTA'
+import React, { useState } from 'react';
+import './App.css';
+import InputText from './components/InputText';
+import TextDescription from './components/textDescription';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(0); // Ensure useState is properly imported <TextDescription /> 
 
   return (
     <>
-    <CTA/>
+      <InputText />
     </>
-  )
+  );
 }
 
-export default App
+export default App;
