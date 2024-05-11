@@ -1,15 +1,14 @@
 import React, { useState } from 'react';
 import './App.css';
-import InputText from './components/InputText';
-import TextDescription from './components/textDescription';
+import Menu from './components/Menu';
 
 function App() {
-  const [count, setCount] = useState(0); // Ensure useState is properly imported <TextDescription /> 
+  const [activeTabIndex, setActiveTabIndex] = useState(0);
 
   return (
-    <>
-      <InputText />
-    </>
+    <div className="App">
+      <Menu activeTabIndex={activeTabIndex} setActiveTabIndex={setActiveTabIndex} />
+    </div>
   );
 }
 
