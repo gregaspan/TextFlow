@@ -3,6 +3,7 @@ from flask_cors import CORS
 from openai import OpenAI
 import requests
 import voicerss_tts
+import assemblyai as aai
 import base64
 
 
@@ -11,6 +12,7 @@ cors = CORS(app, origins='*')
 
 KEY = "zu-a3482e6ed88b38af358d064805358962"
 VOICERSS_TTS_KEY = "862fba3703124c5d9cfd410aff494ae5"
+ASSEMLBLYAI_STT_KEY = "c6d1e28d398741a7a45554a6fd1d0139"
 
 @app.route('/api/innovise', methods=['GET'])
 def innovise():
@@ -92,6 +94,24 @@ def tts():
     audio_data = base64.b64encode(response.content).decode('utf-8')
     audio_player = f"<audio controls='controls'><source src='data:audio/mpeg;base64,{audio_data}'></audio>"
     return audio_player
+
+
+@app.route('/api/stt', methods=['GET'])
+def stt():
+
+    aai.settings.api_key = ASSEMLBLYAI_STT_KEY
+    FILE_URL = "https://github.com/AssemblyAI-Examples/audio-examples/raw/main/20230607_me_canadian_wildfires.mp3"
+
+    transcriber = aai.Transcriber()
+    transcript = transcriber.transcribe(FILE_URL)
+
+    #print("TUKAJJJJJJJJJJJJJJJJ ",type(transcript))
+    #print(transcript.text)
+
+    
+    # Assuming 'transcript' has a method to get text
+    transcript_text = transcript.get_text() if hasattr(transcript, 'get_text') else "No text available"
+    return jsonify({"transcript": transcript.text})
 
 if __name__ == "__main__":
     app.run(debug=True, port=8080)
