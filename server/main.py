@@ -47,12 +47,12 @@ def chat():
     
     chat_completion = client.chat.completions.create(
         stream=False, 
-        model="gpt-4",  
+        model="mistral-medium",  
         response_format={"type": "json_object"},
         messages=[
         {
             "role": "user",
-            "content": f"odgovori na to vprasanje:\n {question} \n iz teka besedila: \n {text} ",
+            "content": f"Odgovori na to vprasanje:\n {question} \n iz teka besedila: \n {text} Odgovori kar se da kratko in jedernato.",
         },
     ],
     )
@@ -73,12 +73,12 @@ def simplify_text():
 
     chat_completion = client.chat.completions.create(
         stream=False, 
-        model="gpt-4",  
+        model="mistral-medium",  
         response_format={"type": "json_object"},
         messages=[
         {
             "role": "user",
-            "content": f"Poenostavi besedilo {level} na nivo: {text}",
+            "content": f"You are a master at making articles easier to understand. You never lose context and you always answer with a clearly readable, summarized article. Zelo poenostavljeno = Concise, Bolj Poenostavljeno = Easy, and Malo poenostavljeno = Normal. Make article more readable on {level} level. This is the article: {text}. Answer in SLOVENIAN language.",
         },
     ],
     )
