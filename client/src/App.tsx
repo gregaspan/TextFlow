@@ -5,7 +5,7 @@ import About from "./About";
 import Scraper from "./Scraper";
 import Textflow from "./Textflow";
 import Words from "./Words";
-import Reader from "./reader";
+import Reader from "./Reader";
 import Landing from "./Landing";
 
 function App() {
