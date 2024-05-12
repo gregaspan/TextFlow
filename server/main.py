@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, Response
 from flask_cors import CORS
 from openai import OpenAI
 from deep_translator import GoogleTranslator
@@ -13,7 +13,7 @@ import os
 app = Flask(__name__)
 cors = CORS(app, origins='*')
 
-KEY = "zu-a3482e6ed88b38af358d064805358962"
+KEY = "zu-23f971dd13e55bf7d161d94a5d46840b"
 VOICERSS_TTS_KEY = "862fba3703124c5d9cfd410aff494ae5"
 
 ASSEMLBLYAI_STT_KEY = "c6d1e28d398741a7a45554a6fd1d0139"
@@ -32,7 +32,7 @@ def innovise():
     })
 
 #vprasanje in text
-@app.route('/api/chat', methods=['GET'])
+@app.route('/api/chat', methods=['GET','POST'])
 def chat():
 
     data = request.json
@@ -56,6 +56,7 @@ def chat():
         },
     ],
     )
+    print("Tukajjjjjjjjj", chat_completion.json())
     return jsonify(chat_completion.json())
 
 @app.route('/api/simplify', methods=['POST'])
@@ -84,7 +85,7 @@ def simplify_text():
 
     return jsonify(chat_completion.json())
 
-@app.route('/api/tts', methods=['GET'])
+@app.route('/api/tts', methods=["GET", "POST"])
 def tts():
 
     data = request.json
@@ -107,9 +108,10 @@ def tts():
 
     response = requests.get(url, headers=headers, params=querystring)
 
-    audio_data = base64.b64encode(response.content).decode('utf-8')
-    audio_player = f"<audio controls='controls'><source src='data:audio/mpeg;base64,{audio_data}'></audio>"
-    return audio_player
+    #audio_data = base64.b64encode(response.content).decode('utf-8')
+    #audio_player = f"<audio controls='controls'><source src='data:audio/mpeg;base64,{audio_data}'></audio>"
+    #return audio_player
+    return Response(response.content, mimetype='audio/mpeg')
 
 @app.route('/api/stt', methods=['GET', 'POST'])
 def stt():
@@ -151,7 +153,6 @@ def stt():
     return jsonify({"transcript": transcript.text, "slov verzija": translated})
     '''
 
-
 @app.route('/api/dictionary', methods=["GET", "POST"])
 def dictionary():
 
@@ -177,12 +178,11 @@ def dictionary():
         "synonyms": temp
     })
 
-@app.route('/api/scrape', methods=["GET"])
+@app.route('/api/scrape', methods=["GET", "POST"])
 def scrape24ur():
 
     data = request.json
     url = data.get('article')
- 
     domain = url.split('/')[2]  
 
     page_to_scrape = requests.get(url)
@@ -226,7 +226,7 @@ def scrape24ur():
 
     vsi_tags = ""
     for tag in tags:
-        vsi_tags = vsi_tags + tag.text
+        vsi_tags = vsi_tags + "#" + tag.text
 
     return jsonify({
         "naslov": naslov[0].text if naslov else "",

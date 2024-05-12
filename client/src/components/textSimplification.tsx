@@ -64,7 +64,12 @@ export default function InputText() {
     };
 
     return (
-        <Container maxW={"3xl"}>
+        <Container maxW={"3xl"} width="100%">
+            {error ? (
+                <Text color='red.500'>{error}</Text>
+            ) : (
+                <Text>Izberi nivo poenostavitve:</Text>
+            )}
             <RadioGroup value={simplificationLevel} onChange={handleLevelChange} mb={6}>
                 <Stack direction='row' spacing={5}>
                     <Radio value='malo poenostavljeno'>malo poenostavljeno</Radio>
@@ -81,17 +86,9 @@ export default function InputText() {
                 mb={4}
             />
 
-            <Button onClick={submitTextForProcessing} colorScheme='blue' mb={4}>
+            <Button onClick={submitTextForProcessing} colorScheme='blue' mb={4} isLoading={loading} loadingText="Scraping...">
                 Poenostavi
             </Button>
-
-            {loading ? (
-                <Spinner />
-            ) : error ? (
-                <Text color='red.500'>{error}</Text>
-            ) : (
-                <Text>Izberi nivo poenostavitve.</Text>
-            )}
 
             <Card>
                 <CardHeader>
@@ -100,9 +97,7 @@ export default function InputText() {
                     </Text>
                 </CardHeader>
                 <CardBody>
-                    {loading ? (
-                        <Spinner size="lg" />
-                    ) : error ? (
+                    {error ? (
                         <Text color="red.500">{error}</Text>
                     ) : (
                         <Text > {message} </Text>
