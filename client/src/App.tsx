@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import "./App.css";
-import CTA from "./components/CTA";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import About from "./About";
 import Scraper from "./Scraper";
 import Textflow from "./Textflow";
 import Words from "./Words";
 import Reader from "./reader";
+import Landing from "./Landing";
 
 function App() {
   const [activeTabIndex, setActiveTabIndex] = useState(0);
@@ -15,7 +15,7 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <Routes>
-          <Route index element={<CTA />} />
+          <Route index element={<Landing />} />
           <Route path="/scraper" element={<Scraper />} />
           <Route path="/textflow" element={<Textflow />} />
           <Route path="/reader" element={<Reader />} />
