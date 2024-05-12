@@ -1,43 +1,50 @@
 'use client'
 
-import { Container, Grid, GridItem, Flex, Box, Text, Heading } from '@chakra-ui/react'
+import {
+  Box,
+  chakra,
+  SimpleGrid,
+  Stat,
+  StatLabel,
+  StatNumber,
+  useColorModeValue,
+} from '@chakra-ui/react'
 
-function statsTitleDescription() {
+interface StatsCardProps {
+  title: string
+  stat: string
+}
+function StatsCard(props: StatsCardProps) {
+  const { title, stat } = props
   return (
-    <Container py={5} maxW={'container.lg'}>
-      <Grid
-        templateColumns={{
-          base: 'repeat(1, 1fr)',
-          sm: 'repeat(2, 1fr)',
-          md: 'repeat(4, 1fr)',
-        }}
-        gap={6}>
-        <GridItem w="100%" colSpan={{ base: 1, sm: 2, md: 2 }}>
-          <Heading as={'h2'}>Medium Length Title</Heading>
-        </GridItem>
-        <GridItem w="100%">
-          <Flex flexDirection={'column'}>
-            <Text fontSize={'4xl'} fontWeight={'bold'}>
-              20%
-            </Text>
-            <Box fontSize={'sm'}>
-              Description for the number. People always pay attention to numbers.
-            </Box>
-          </Flex>
-        </GridItem>
-        <GridItem w="100%">
-          <Flex flexDirection={'column'}>
-            <Text fontSize={'4xl'} fontWeight={'bold'}>
-              20%
-            </Text>
-            <Box fontSize={'sm'}>
-              Description for the number. People always pay attention to numbers.
-            </Box>
-          </Flex>
-        </GridItem>
-      </Grid>
-    </Container>
+    <Stat
+      px={{ base: 4, md: 8 }}
+      py={'5'}
+      shadow={'xl'}
+      border={'1px solid'}
+      borderColor={useColorModeValue('gray.800', 'gray.500')}
+      rounded={'lg'}>
+      <StatLabel fontWeight={'medium'} isTruncated>
+        {title}
+      </StatLabel>
+      <StatNumber fontSize={'2xl'} fontWeight={'medium'}>
+        {stat}
+      </StatNumber>
+    </Stat>
   )
 }
 
-export default statsTitleDescription
+export default function BasicStatistics() {
+  return (
+    <Box maxW="7xl" mx={'auto'} pt={5} px={{ base: 2, sm: 12, md: 17 }}>
+      <chakra.h1 textAlign={'center'} fontSize={'4xl'} py={10} fontWeight={'bold'}>
+        What is our company doing?
+      </chakra.h1>
+      <SimpleGrid columns={{ base: 1, md: 3 }} spacing={{ base: 5, lg: 8 }}>
+        <StatsCard title={'We serve'} stat={'50,000 people'} />
+        <StatsCard title={'In'} stat={'30 different countries'} />
+        <StatsCard title={'Who speak'} stat={'100 different languages'} />
+      </SimpleGrid>
+    </Box>
+  )
+}
