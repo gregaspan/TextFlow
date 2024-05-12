@@ -6,6 +6,7 @@ import About from "./About";
 import Scraper from "./Scraper";
 import Textflow from "./Textflow";
 import Words from "./Words";
+import Reader from "./reader";
 
 function App() {
   const [activeTabIndex, setActiveTabIndex] = useState(0);
@@ -17,6 +18,7 @@ function App() {
           <Route index element={<CTA />} />
           <Route path="/scraper" element={<Scraper />} />
           <Route path="/textflow" element={<Textflow />} />
+          <Route path="/reader" element={<Reader />} />
           <Route path="/words" element={<Words />} />
           <Route path="/about" element={<About />} />
 
