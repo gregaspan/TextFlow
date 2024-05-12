@@ -7,6 +7,8 @@ import voicerss_tts
 import assemblyai as aai
 import base64
 from bs4 import BeautifulSoup
+from werkzeug.utils import secure_filename
+import os
 
 app = Flask(__name__)
 cors = CORS(app, origins='*')
@@ -29,15 +31,20 @@ def innovise():
         ]
     })
 
+#vprasanje in text
 @app.route('/api/chat', methods=['GET'])
 def chat():
 
-    question = "Kaj je glavno mesto Slovenije?" 
+    data = request.json
+    question = data.get('question')
+    text = data.get('text')
+
+    #question = "Kaj je glavno mesto Slovenije?" 
     client = OpenAI(
     api_key=KEY,
     base_url="https://zukijourney.xyzbot.net/v1"
     )
-
+    
     chat_completion = client.chat.completions.create(
         stream=False, 
         model="gpt-4",  
@@ -45,7 +52,7 @@ def chat():
         messages=[
         {
             "role": "user",
-            "content": question,
+            "content": f"odgovori na to vprasanje:\n {question} \n iz teka besedila: \n {text} ",
         },
     ],
     )
@@ -55,7 +62,6 @@ def chat():
 def simplify_text():
  
     data = request.json
-    print(data)
     text = data.get('text')
     level = data.get('level')
 
@@ -76,15 +82,18 @@ def simplify_text():
     ],
     )
 
-    print(chat_completion)
     return jsonify(chat_completion.json())
 
 @app.route('/api/tts', methods=['GET'])
 def tts():
+
+    data = request.json
+    text = data.get('text')
+
     url = "https://voicerss-text-to-speech.p.rapidapi.com/"
     querystring = {
         "key": VOICERSS_TTS_KEY,
-        "src": "Zdravo svet!",
+        "src": text,
         "hl": "sl-si",
         "r": "0",
         "c": "mp3",
@@ -102,69 +111,54 @@ def tts():
     audio_player = f"<audio controls='controls'><source src='data:audio/mpeg;base64,{audio_data}'></audio>"
     return audio_player
 
-
-
-@app.route('/api/stt', methods=['GET'])
+@app.route('/api/stt', methods=['GET', 'POST'])
 def stt():
 
+    transcript_text = ""
+    translated = ""
     aai.settings.api_key = ASSEMLBLYAI_STT_KEY
+
+    if request.method == 'POST':
+        if 'file' in request.files:
+            file = request.files['file']
+            if file and file.filename.endswith('.mp3'):
+                filename = secure_filename(file.filename)
+                base_directory = os.path.dirname(__file__)
+                file_path = os.path.join(base_directory, 'files', filename)
+                file.save(file_path)
+                transcriber = aai.Transcriber()
+                transcript = transcriber.transcribe(file_path)
+                transcript_text = transcript.get_text() if hasattr(transcript, 'get_text') else "No text available"
+        elif 'file_url' in request.form:
+            file_url = request.form['file_url']
+            transcriber = aai.Transcriber()
+            transcript = transcriber.transcribe(file_url)
+            transcript_text = transcript.get_text() if hasattr(transcript, 'get_text') else "No text available"
+    else:
+        return jsonify({"error": "Invalid request method"}), 405
+
+    translated = GoogleTranslator(source='en', target='sl').translate(transcript.text)
+    return jsonify({"transcript": transcript_text, "slovene_version": translated})
+    '''
     FILE_URL = "https://github.com/AssemblyAI-Examples/audio-examples/raw/main/20230607_me_canadian_wildfires.mp3"
 
     transcriber = aai.Transcriber()
     transcript = transcriber.transcribe(FILE_URL)
 
-    #print("TUKAJJJJJJJJJJJJJJJJ ",type(transcript))
-    #print(transcript.text)
-
+    translated = GoogleTranslator(source='en', target='sl').translate(transcript.text)
     
-    # Assuming 'transcript' has a method to get text
     transcript_text = transcript.get_text() if hasattr(transcript, 'get_text') else "No text available"
-    return jsonify({"transcript": transcript.text})
+    return jsonify({"transcript": transcript.text, "slov verzija": translated})
+    '''
 
-@app.route('/api/translate-en', methods=["GET", "POST"])
-def translate_en():
-    url = "https://google-translate1.p.rapidapi.com/language/translate/v2"
-
-    payload = {
-        "q": "Kje je knjiznica?",
-        "target": "en",
-        "source": "sl"
-    }
-    headers = {
-        "content-type": "application/x-www-form-urlencoded",
-        "Accept-Encoding": "application/gzip",
-        "X-RapidAPI-Key": X_RAPIDAPI_KEY,
-        "X-RapidAPI-Host": "google-translate1.p.rapidapi.com"
-    }
-
-    response = requests.post(url, data=payload, headers=headers)
-    return response.json()
-
-@app.route('/api/translate-slo', methods=["GET", "POST"])
-def translate_slo():
-    url = "https://google-translate1.p.rapidapi.com/language/translate/v2"
-
-    payload = {
-        "q": "Where is the library?",
-        "target": "sl",
-        "source": "en"
-    }
-    headers = {
-        "content-type": "application/x-www-form-urlencoded",
-        "Accept-Encoding": "application/gzip",
-        "X-RapidAPI-Key": X_RAPIDAPI_KEY,
-        "X-RapidAPI-Host": "google-translate1.p.rapidapi.com"
-    }
-
-    response = requests.post(url, data=payload, headers=headers)
-    return response.json()
 
 @app.route('/api/dictionary', methods=["GET", "POST"])
 def dictionary():
-    translated = GoogleTranslator(source='sl', target='en').translate("slabo") 
-    print(translated)
 
-    
+    data = request.json
+    word = data.get('word')
+    translated = GoogleTranslator(source='sl', target='en').translate(word) 
+
     url = f"https://api.api-ninjas.com/v1/thesaurus?word={translated}"
 
     headers = {
@@ -172,14 +166,23 @@ def dictionary():
     }
 
     neke = requests.get(url, headers=headers).json()["synonyms"]
-    tem = []
+    temp = []
     for i in range(5):
-        tem.append(GoogleTranslator(source='en', target='sl').translate(neke[i]))
-    return tem
+        #temp.append(GoogleTranslator(source='sl', target='en').translate(neke[i]))
+        temp.append(neke[i])
+
+    return jsonify({
+        "original_word": word,
+        "translated_word": translated,
+        "synonyms": temp
+    })
 
 @app.route('/api/scrape', methods=["GET"])
 def scrape24ur():
-    url = ''  
+
+    data = request.json
+    url = data.get('article')
+ 
     domain = url.split('/')[2]  
 
     page_to_scrape = requests.get(url)
@@ -235,7 +238,9 @@ def scrape24ur():
 
 @app.route('/api/sskj', methods=["GET"])
 def sskj():
-    beseda = "miza"
+    data = request.json
+    beseda = data.get('word')
+
     url = "https://www.fran.si/iskanje?FilteredDictionaryIds=130&View=1&Query=" + beseda
     page_to_scrape = requests.get(url)
     soup = BeautifulSoup(page_to_scrape.text, 'html.parser')
