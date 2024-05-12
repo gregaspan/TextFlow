@@ -8,13 +8,15 @@ import {
     SliderMark,
   } from '@chakra-ui/react';
   import { Tooltip } from '@chakra-ui/react';
+  import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
 
 
 const WordCarousel: React.FC = () => {
   const [text, setText] = useState<string>('');
   const [words, setWords] = useState<string[]>([]);
   const [currentWordIndex, setCurrentWordIndex] = useState<number>(0);
-  const [sliderValue, setSliderValue] = React.useState(1000);
+  const [sliderValue, setSliderValue] = React.useState(100);
   const [showTooltip, setShowTooltip] = React.useState(false);
 
   // Handle text input changes
@@ -36,6 +38,8 @@ const WordCarousel: React.FC = () => {
   }, [words, sliderValue]); 
 
   return (
+    <>
+    <Navbar />
     <div className="carousel-container">
       <input
         type="text"
@@ -92,6 +96,8 @@ const WordCarousel: React.FC = () => {
         </Tooltip>
         </Slider>
     </div>
+    <Footer />
+    </>
   );
   function mapSliderValueToRange(sliderValue: number) {
     const inputMin = 30, inputMax = 200;
