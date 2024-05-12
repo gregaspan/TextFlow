@@ -246,18 +246,22 @@ interface NavItem {
 const NAV_ITEMS: Array<NavItem> = [
   {
     label: 'Home',
-    href: '#',
+    href: '/',
   },
   {
     label: 'Text Flow',
-    href: '#',
+    href: '/scraper',
   },
   {
     label: 'Words',
-    href: '#',
+    href: '/words',
+  },
+  {
+    label: 'Reader',
+    href: '/reader',
   },
   {
     label: 'About',
-    href: '#',
+    href: '/about',
   },
 ]

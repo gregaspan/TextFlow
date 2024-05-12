@@ -40,3 +40,66 @@
 .read-the-docs {
   color: #888;
 }
+.carousel-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+
+input[type='text'] {
+  width: 80%;
+  margin-bottom: 20px;
+  padding: 8px;
+  font-size: 16px;
+}
+
+.carousel-display {
+  position: relative;
+  width: 90%;
+  height: 60px;
+  overflow: hidden;
+  text-align: center;
+}
+
+.word {
+  position: absolute;
+  opacity: 0;
+  font-size: 20px;
+  white-space: nowrap;
+  transition: all 1s ease-in-out;
+}
+
+.active {
+  width: 80px;
+  transform: translateX(-40%) scale(1.3);
+  opacity: 1;
+  font-weight: bold;
+}
+
+.left {
+  width: 80px;
+  transform: translateX(-350%);
+  opacity: 0.5;
+}
+.left-hidden {
+  width: 80px;
+  transform: translateX(-550%);
+  opacity: 0;
+}
+
+.right {
+  width: 80px;
+  transform: translateX(250%);
+  opacity: 0.5;
+}
+.right-hidden {
+  width: 80px;
+  transform: translateX(550%);
+  opacity: 0;
+}
+
+.hidden {
+  width: 80px;
+  opacity: 0;
+}

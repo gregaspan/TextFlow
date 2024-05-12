@@ -19,7 +19,7 @@ VOICERSS_TTS_KEY = "862fba3703124c5d9cfd410aff494ae5"
 ASSEMLBLYAI_STT_KEY = "c6d1e28d398741a7a45554a6fd1d0139"
 X_RAPIDAPI_KEY = "1d9f8aa758msh0f2f642becf4515p1bfb89jsnf70f64195fe4"
 DICTIONARY_API = "GJgVXGJMDDfsC7576edkFw==h7tVsSDr6WCNdoXX"
-
+SERP_API_KEY = "2e26df2e32f8642d3ade8783db66d9e8bfa4e0b86283d94ad14011402b4e46e3"
 
 @app.route('/api/innovise', methods=['GET'])
 def innovise():
@@ -238,24 +238,41 @@ def scrape24ur():
 
 @app.route('/api/sskj', methods=["GET"])
 def sskj():
-    data = request.json
-    beseda = data.get('word')
-
-    url = "https://www.fran.si/iskanje?FilteredDictionaryIds=130&View=1&Query=" + beseda
+    word = request.args.get('word', '')
+    url = f"https://www.fran.si/iskanje?FilteredDictionaryIds=130&View=1&Query={word}"
     page_to_scrape = requests.get(url)
     soup = BeautifulSoup(page_to_scrape.text, 'html.parser')
 
-    beseda = beseda.capitalize()
-    zaglavje = soup.find_all('span', attrs={"data-group": "header"})
-    definicija = soup.find_all('span', attrs={"data-group": "explanation "})
-    celota = soup.find_all('div', attrs={"class": "entry-content"})
+    word_cap = word.capitalize()
+    header = soup.find('span', attrs={"data-group": "header"})
+    definition = soup.find('span', attrs={"data-group": "explanation "}) # Ensure the attribute matches correctly
+    full_content = soup.find('div', attrs={"class": "entry-content"})
 
-    return jsonify({
-        "beseda": beseda,
-        "zaglavje": zaglavje[0].text if zaglavje else "",
-        "definicija": definicija[0].text if definicija else "",
-        "celota": celota[0].text if celota else ""
-    })
+    response_data = {
+        "beseda": word_cap,
+        "zaglavje": header.text if header else "",
+        "definicija": definition.text if definition else "",
+        "celota": full_content.text if full_content else ""
+    }
+    return jsonify(response_data)
 
+@app.route('/api/image', methods=["GET"])
+def get_image():
+    word = request.args.get('word', '')
+    translated = GoogleTranslator(source='sl', target='en').translate(word)
+
+    api_endpoint = 'https://serpapi.com/search'
+    params = {
+        'engine': 'google', 
+        'q': translated, 
+        'tbm': 'isch',
+        'api_key': SERP_API_KEY
+    }
+    response = requests.get(api_endpoint, params=params)
+    data = response.json()
+
+    image_url = data['images_results'][2]['original'] if 'images_results' in data and data['images_results'] else 'No image found'
+    return jsonify({'image_url': image_url})
+    
 if __name__ == "__main__":
     app.run(debug=True, port=8080)
