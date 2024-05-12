@@ -29,8 +29,10 @@ def innovise():
         ]
     })
 
-@app.route('/api/ai', methods=['GET'])
-def ai():
+@app.route('/api/chat', methods=['GET'])
+def chat():
+
+    question = "Kaj je glavno mesto Slovenije?" 
     client = OpenAI(
     api_key=KEY,
     base_url="https://zukijourney.xyzbot.net/v1"
@@ -43,7 +45,7 @@ def ai():
         messages=[
         {
             "role": "user",
-            "content": 'Kaj je glavno mesto Slovenije? ',
+            "content": question,
         },
     ],
     )
