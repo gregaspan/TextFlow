@@ -7,6 +7,7 @@ import Textflow from "./Textflow";
 import Words from "./Words";
 import Reader from "./Reader";
 import Landing from "./Landing";
+import SignIn from "./components/SignIn";
 
 function App() {
   const [activeTabIndex, setActiveTabIndex] = useState(0);
@@ -21,6 +22,7 @@ function App() {
           <Route path="/reader" element={<Reader />} />
           <Route path="/words" element={<Words />} />
           <Route path="/about" element={<About />} />
+          <Route path="/signin" element={<SignIn />} />
 
         </Routes>
       </BrowserRouter>

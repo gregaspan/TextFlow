@@ -69,7 +69,7 @@ export default function WithSubnavigation() {
           direction={'row'}
           spacing={6}>
             <ColorMode />
-          <Button as={'a'} fontSize={'sm'} fontWeight={400} variant={'link'} href={'#'}>
+          <Button as={'a'} fontSize={'sm'} fontWeight={400} variant={'link'} href={'/signin'}>
             Sign In
           </Button>
           <Button
@@ -249,7 +249,7 @@ const NAV_ITEMS: Array<NavItem> = [
     href: '/',
   },
   {
-    label: 'Text Flow',
+    label: 'TextFlow',
     href: '/scraper',
   },
   {

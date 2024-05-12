@@ -13,9 +13,13 @@ import {
   Text,
   useColorModeValue,
 } from '@chakra-ui/react'
+import Navbar from './Navbar'
+import Footer from './Footer'
 
 export default function SimpleCard() {
   return (
+    <>
+    <Navbar />
     <Flex
       minH={'100vh'}
       align={'center'}
@@ -63,5 +67,8 @@ export default function SimpleCard() {
         </Box>
       </Stack>
     </Flex>
+    <Footer />
+    </>
+
   )
 }
