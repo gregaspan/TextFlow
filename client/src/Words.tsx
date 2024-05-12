@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Box, Text, Image, Flex, Input, Button } from "@chakra-ui/react";
 import axios from "axios";
 import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
 
 function App() {
   const [word, setWord] = useState("");
@@ -65,6 +66,7 @@ function App() {
           </Button>
         </Flex>
       </Flex>
+      <Footer />
     </>
   );
 }

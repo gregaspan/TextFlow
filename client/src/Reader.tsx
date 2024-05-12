@@ -69,7 +69,7 @@ const WordCarousel: React.FC = () => {
         defaultValue={1000}
         step={10}
         min={30}
-        max={200}
+        max={300}
         colorScheme='teal'
         onChange={setSliderValueAndTransition}
         onMouseEnter={() => setShowTooltip(true)}
@@ -78,8 +78,8 @@ const WordCarousel: React.FC = () => {
         <SliderMark value={30} mt='1' ml='-2.5' fontSize='sm'>
             30
         </SliderMark>
-        <SliderMark value={200} mt='1' ml='-2.5' fontSize='sm'>
-            200
+        <SliderMark value={300} mt='1' ml='-2.5' fontSize='sm'>
+            300
         </SliderMark>
         <SliderTrack>
             <SliderFilledTrack />
@@ -96,21 +96,29 @@ const WordCarousel: React.FC = () => {
         </Tooltip>
         </Slider>
     </div>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/><br/>
+    <br/><br/><br/><br/><br/><br/><br/><br/><br/>
     <Footer />
     </>
   );
-  function mapSliderValueToRange(sliderValue: number) {
-    const inputMin = 30, inputMax = 200;
-    const outputMin = 2000, outputMax = 300;
-    // Linearly interpolate from slider range to desired range
-    return outputMin + ((outputMax - outputMin) * (sliderValue - inputMin)) / (inputMax - inputMin);
-  }
+function mapSliderValueToRange(sliderValue: number) {
+    let output: number; 
+    output = 60/sliderValue*1000;
+    console.log(output);
+    return output;
+}
 function setSliderValueAndTransition(v: any) {
-    const inputMin = 30, inputMax = 200;
-    const outputMin = 1.5, outputMax = 0.3;
 
     // Linearly interpolate from slider range to desired transition speed range
-    const transitionSpeed = outputMin + ((outputMax - outputMin) * (v - inputMin)) / (inputMax - inputMin);
+    const transitionSpeed = 20/v;
 
     // Apply the transition speed to the "word" class
     const wordElements = document.getElementsByClassName("word") as HTMLCollectionOf<HTMLElement>;
