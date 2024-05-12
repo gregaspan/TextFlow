@@ -1,13 +1,27 @@
-import React, { useState } from 'react';
-import './App.css';
-import Menu from './components/Menu';
+import React, { useState } from "react";
+import "./App.css";
+import CTA from "./components/CTA";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import About from "./About";
+import Scraper from "./Scraper";
+import Textflow from "./Textflow";
+import Words from "./Words";
 
 function App() {
   const [activeTabIndex, setActiveTabIndex] = useState(0);
 
   return (
     <div className="App">
-      <Menu activeTabIndex={activeTabIndex} setActiveTabIndex={setActiveTabIndex} />
+      <BrowserRouter>
+        <Routes>
+          <Route index element={<CTA />} />
+          <Route path="/scraper" element={<Scraper />} />
+          <Route path="/textflow" element={<Textflow />} />
+          <Route path="/words" element={<Words />} />
+          <Route path="/about" element={<About />} />
+
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }
