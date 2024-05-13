@@ -14,6 +14,7 @@ import TextSimplification from "./components/textSimplification";
 import TextToSpeech from "./components/TextToSpeach";
 import Header from "./components/Navbar";
 import SpeechToText from "./components/SpeachToText";
+import ClickableText from "./components/ClickableText";
 
 export default function TextInputFlow() {
   const [text, setText] = useState('');
@@ -34,7 +35,9 @@ export default function TextInputFlow() {
               placeholder="Enter text here"
               focusBorderColor={colorScheme}
             />
-            <Textarea value={text} isReadOnly />
+            <div className="edditable" style={{ width: "100%" }}>
+              <ClickableText text={text} />
+            </div>
             <Chat text={text} />
           </VStack>
 

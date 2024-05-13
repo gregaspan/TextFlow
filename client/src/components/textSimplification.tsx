@@ -1,4 +1,4 @@
-import { Textarea, Text, RadioGroup, Stack, Radio, Button, Card, CardHeader, CardBody, Container } from '@chakra-ui/react';
+import { Textarea, Text, RadioGroup, Stack, Radio, Button, Card, CardHeader, CardBody, Container,useColorModeValue } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
 
 interface InputTextProps {
@@ -12,6 +12,7 @@ export default function InputText({ initialText }: InputTextProps) {
     const [error, setError] = useState<string | null>(null);
     const [message, setMessages] = useState<string[]>([]);
     const [inputText, setInputText] = useState(initialText);
+    const bg = useColorModeValue('blue', 'orange')
 
 
     useEffect(() => {
@@ -96,7 +97,7 @@ export default function InputText({ initialText }: InputTextProps) {
                 style={{ width: 0, height: 0, opacity: 0 }}
             />
 
-            <Button onClick={submitTextForProcessing} colorScheme='blue' mb={4} isLoading={loading} loadingText="Scraping...">
+            <Button onClick={submitTextForProcessing} colorScheme={bg} mb={4} isLoading={loading} loadingText="Scraping...">
                 Poenostavi
             </Button>
 
