@@ -18,6 +18,7 @@ import Chat from "./components/Chat";
 import TextSimplification from "./components/textSimplification"
 import TextToSpeech from "./components/TextToSpeach"
 import Header from "./components/Navbar";
+import SpeachToText from "./components/SpeachToText";
 
 export default function Scraper() {
   const [url, setUrl] = useState('');
@@ -80,6 +81,9 @@ export default function Scraper() {
       </Box>
       <Box flex="1" p={5} bg={bg} boxShadow="lg" borderRadius="lg">
         <TextToSpeech text={data.vsebina_clanka} />
+      </Box>
+      <Box flex="1" p={5} bg={bg} boxShadow="lg" borderRadius="lg">
+        <SpeachToText />
       </Box>
     </VStack>
     </>

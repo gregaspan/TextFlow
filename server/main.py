@@ -13,7 +13,7 @@ import os
 app = Flask(__name__)
 cors = CORS(app, origins='*')
 
-KEY = "zu-23f971dd13e55bf7d161d94a5d46840b"
+KEY = "zu-a3482e6ed88b38af358d064805358962"
 VOICERSS_TTS_KEY = "862fba3703124c5d9cfd410aff494ae5"
 
 ASSEMLBLYAI_STT_KEY = "c6d1e28d398741a7a45554a6fd1d0139"
@@ -52,7 +52,7 @@ def chat():
         messages=[
         {
             "role": "user",
-            "content": f"Odgovori na to vprasanje:\n {question} \n iz teka besedila: \n {text} Odgovori kar se da kratko in jedernato.",
+            "content": f"Odgovori na to vprasanje:\n {question} \n iz teka besedila: \n {text} Odgovori kar se da kratko in jedernato in v slovenskem jeziku.",
         },
     ],
     )
@@ -116,11 +116,27 @@ def tts():
 @app.route('/api/stt', methods=['GET', 'POST'])
 def stt():
 
-    transcript_text = ""
+    data = request.json
+    url = data.get('mp3_url')
+
+    aai.settings.api_key = ASSEMLBLYAI_STT_KEY
+    #FILE_URL = "https://github.com/AssemblyAI-Examples/audio-examples/raw/main/20230607_me_canadian_wildfires.mp3"
+
+    transcriber = aai.Transcriber()
+    transcript = transcriber.transcribe(url)
+
+    translated = GoogleTranslator(source='en', target='sl').translate(transcript.text)
+    
+    transcript_text = transcript.get_text() if hasattr(transcript, 'get_text') else "No text available"
+    return jsonify({"transcript": transcript.text, "slo_verzija": translated})
+
+    '''
+transcript_text = ""
     translated = ""
+    
     aai.settings.api_key = ASSEMLBLYAI_STT_KEY
 
-    if request.method == 'POST':
+    if request.method == 'GET':
         if 'file' in request.files:
             file = request.files['file']
             if file and file.filename.endswith('.mp3'):
@@ -134,23 +150,14 @@ def stt():
         elif 'file_url' in request.form:
             file_url = request.form['file_url']
             transcriber = aai.Transcriber()
-            transcript = transcriber.transcribe(file_url)
+            #transcript = transcriber.transcribe(file_url)
+            transcript = transcriber.transcribe("https://github.com/AssemblyAI-Examples/audio-examples/raw/main/20230607_me_canadian_wildfires.mp3")
             transcript_text = transcript.get_text() if hasattr(transcript, 'get_text') else "No text available"
     else:
         return jsonify({"error": "Invalid request method"}), 405
 
     translated = GoogleTranslator(source='en', target='sl').translate(transcript.text)
     return jsonify({"transcript": transcript_text, "slovene_version": translated})
-    '''
-    FILE_URL = "https://github.com/AssemblyAI-Examples/audio-examples/raw/main/20230607_me_canadian_wildfires.mp3"
-
-    transcriber = aai.Transcriber()
-    transcript = transcriber.transcribe(FILE_URL)
-
-    translated = GoogleTranslator(source='en', target='sl').translate(transcript.text)
-    
-    transcript_text = transcript.get_text() if hasattr(transcript, 'get_text') else "No text available"
-    return jsonify({"transcript": transcript.text, "slov verzija": translated})
     '''
 
 @app.route('/api/dictionary', methods=["GET", "POST"])
