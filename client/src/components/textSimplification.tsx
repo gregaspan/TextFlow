@@ -1,4 +1,4 @@
-import { Textarea, Text, RadioGroup, Stack, Radio, Button, Card, CardHeader, CardBody, Container,useColorModeValue } from '@chakra-ui/react';
+import { Textarea, Text, RadioGroup, Stack, Radio, Button, Card, CardHeader, CardBody, Container,useColorModeValue, Box } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
 
 interface InputTextProps {
@@ -74,19 +74,24 @@ export default function InputText({ initialText }: InputTextProps) {
     };
 
     return (
-        <Container maxW={"3xl"} width="100%">
+        <Container maxW={"xl"} width="100%">
             {error ? (
                 <Text color='red.500'>{error}</Text>
             ) : (
-                <Text>Izberi nivo poenostavitve:</Text>
+                
+                <Text fontSize="3xl" fontWeight="bold">
+            Izberi nivo poenostavitve:
+          </Text>
             )}
-            <RadioGroup value={simplificationLevel} onChange={handleLevelChange} mb={6}>
-                <Stack direction='row' spacing={5}>
-                    <Radio value='malo poenostavljeno'>malo poenostavljeno</Radio>
-                    <Radio value='bolj poenostavljeno'>bolj poenostavljeno</Radio>
-                    <Radio value='zelo poenostavljeno'>zelo poenostavljeno</Radio>
-                </Stack>
-            </RadioGroup>
+            <Box display="flex" justifyContent="center" alignItems="center" width="100%">
+      <RadioGroup value={simplificationLevel} onChange={handleLevelChange} mb={6}>
+        <Stack direction="row" spacing={5}>
+          <Radio value="malo poenostavljeno">malo poenostavljeno</Radio>
+          <Radio value="bolj poenostavljeno">bolj poenostavljeno</Radio>
+          <Radio value="zelo poenostavljeno">zelo poenostavljeno</Radio>
+        </Stack>
+      </RadioGroup>
+    </Box>
 
             <Textarea
                 value={inputText}

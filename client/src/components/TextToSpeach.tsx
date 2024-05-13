@@ -64,13 +64,13 @@ const TextToSpeech: React.FC<TextToSpeechProps> = ({ text }) => {
         isLoading={isLoading}
         loadingText="Converting..."
       >
-        Convert to Speech
+        Pretvori v govor
       </Button>
       {isLoading ? (
         <Progress size="xs" isIndeterminate />
       ) : audioBlobUrl ? (
         <Box boxShadow="md" p="4" borderRadius="md" w="full">
-          <Text fontSize="md" mb="2">Listen to the audio:</Text>
+          <Text fontSize="md" mb="2">Pretvori v govor:</Text>
           <audio controls src={audioBlobUrl} style={{ width: '100%' }}>
             Your browser does not support the audio element.
           </audio>
