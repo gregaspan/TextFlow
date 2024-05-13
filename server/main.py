@@ -39,7 +39,11 @@ def chat():
     question = data.get('question')
     text = data.get('text')
 
+    #print("TEXTTTTTT", text)
+    #print("VPRASANJEEEE", question)
+
     #question = "Kaj je glavno mesto Slovenije?" 
+    
     client = OpenAI(
     api_key=KEY,
     base_url="https://zukijourney.xyzbot.net/v1"
@@ -52,11 +56,11 @@ def chat():
         messages=[
         {
             "role": "user",
-            "content": f"Odgovori na to vprasanje:\n {question} \n iz tega besedila: \n {text} Odgovori v slovenskem jeziku kar se da kratko in jedernato.",
+            "content": f"Odgovori na to vprasanje:\n {question} \n iz tega besedila: \n {text} Odgovori kar se da kratko in jedernato in v slovenskem jeziku.",
         },
     ],
     )
-    print("Tukajjjjjjjjj", chat_completion.json())
+    #print("Tukajjjjjjjjj", chat_completion.json())
     return jsonify(chat_completion.json())
 
 @app.route('/api/simplify', methods=['POST'])
