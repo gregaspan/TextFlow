@@ -72,23 +72,7 @@ export default function SmallCentered() {
         justify={'center'}
         align={'center'}>
         <Logor />
-        <Stack direction={'row'} spacing={6}>
-          <Box as="a" href={'/'}>
-            Home
-          </Box>
-          <Box as="a" href={'/scraper'}>
-          TextFlow
-          </Box>
-          <Box as="a" href={'/TextInputFlow'}>
-          TextInputFlow
-          </Box>
-          <Box as="a" href={'/words'}>
-          Words
-          </Box>
-          <Box as="a" href={'/reader'}>
-          Reader
-          </Box>
-        </Stack>
+        
       </Container>
       <Box
         borderTopWidth={1}
