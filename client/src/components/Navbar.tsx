@@ -77,7 +77,7 @@ export default function WithSubnavigation() {
             fontWeight={600}
             color={'white'}
             bg={'pink.400'}
-            href={'#'}
+            href={'https://gozenforms.com/3XcCLycZXs5N5HdMqZbC'}
             _hover={{
               bg: 'pink.300',
             }}>
@@ -261,9 +261,5 @@ const NAV_ITEMS: Array<NavItem> = [
   {
     label: 'Reader',
     href: '/reader',
-  },
-  {
-    label: 'About',
-    href: '/about',
   },
 ]

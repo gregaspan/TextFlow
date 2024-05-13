@@ -86,7 +86,7 @@ def simplify_text():
         messages=[
         {
             "role": "user",
-            "content": f"You are a master at making articles easier to understand. You never lose context and you always answer with a clearly readable, summarized article. Zelo poenostavljeno = Concise, Bolj Poenostavljeno = Easy, and Malo poenostavljeno = Normal. Make article more readable on {level} level. This is the article: {text}. Answer in SLOVENIAN language.",
+            "content": f"You are a master at making articles easier to understand. You never lose context and you always answer with a clearly readable, summarized article. Zelo poenostavljeno = Concise, Bolj Poenostavljeno = Easy, and Malo poenostavljeno = Normal. Make article more readable on {level} level. This is the article: {text}. Answer in SLOVENIAN language. Answer in one sentence.",
         },
     ],
     )

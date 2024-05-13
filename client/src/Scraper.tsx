@@ -20,6 +20,7 @@ import TextToSpeech from "./components/TextToSpeach"
 import Header from "./components/Navbar";
 import SpeachToText from "./components/SpeachToText";
 import ClickableText from './components/ClickableText';
+import Footer from "./components/Footer";
 
 export default function Scraper() {
   const [url, setUrl] = useState('');
@@ -70,7 +71,6 @@ export default function Scraper() {
     <VStack spacing={5} p={5} align="stretch">
       <Flex direction={['column', 'column', 'row']} p={5} align="stretch">
         <VStack spacing={5} flex="3" p={5} align="stretch" overflow="auto">
-          <Text fontSize="2xl" fontWeight="bold" color={colorScheme}>Article Scraper</Text>
           <InputGroup>
             <InputLeftElement pointerEvents="none">
               <Icon as={Search2Icon} color="gray.400" />
@@ -108,6 +108,7 @@ export default function Scraper() {
         <SpeachToText />
       </Box>
     </VStack>
+    <Footer />
     </>
   );
 }
