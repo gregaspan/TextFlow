@@ -14,7 +14,7 @@ app = Flask(__name__)
 cors = CORS(app, origins='*')
 
 KEY = "zu-a3482e6ed88b38af358d064805358962"
-VOICERSS_TTS_KEY = "862fba3703124c5d9cfd410aff494ae5"
+VOICERSS_TTS_KEY = "087cb2c2f68944969386601abed14abd"
 
 ASSEMLBLYAI_STT_KEY = "c6d1e28d398741a7a45554a6fd1d0139"
 X_RAPIDAPI_KEY = "1d9f8aa758msh0f2f642becf4515p1bfb89jsnf70f64195fe4"
@@ -43,7 +43,7 @@ def chat():
     #print("VPRASANJEEEE", question)
 
     #question = "Kaj je glavno mesto Slovenije?" 
-    
+
     client = OpenAI(
     api_key=KEY,
     base_url="https://zukijourney.xyzbot.net/v1"
@@ -70,6 +70,10 @@ def simplify_text():
     text = data.get('text')
     level = data.get('level')
 
+    print(text)
+    print(level)
+
+
     client = OpenAI(
     api_key=KEY,
     base_url="https://zukijourney.xyzbot.net/v1"
@@ -94,6 +98,8 @@ def tts():
 
     data = request.json
     text = data.get('text')
+
+    print(text)
 
     url = "https://voicerss-text-to-speech.p.rapidapi.com/"
     querystring = {
