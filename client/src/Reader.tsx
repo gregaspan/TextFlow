@@ -7,6 +7,7 @@ import {
   SliderThumb,
   SliderMark,
   useColorModeValue,
+  Text,
 } from '@chakra-ui/react';
 import { Tooltip } from '@chakra-ui/react';
 import Navbar from "./components/Navbar";
@@ -37,6 +38,10 @@ const WordCarousel: React.FC = () => {
   // Handle text input changes
   const handleInputChange = (e: ChangeEvent<HTMLDivElement>) => {
     var inputText = e.target.textContent ? e.target.textContent : '';
+    const wordElements = document.getElementsByClassName("input-text")[0] as HTMLDivElement;
+    wordElements.style.display = (inputText == '')?``:'none';
+
+
     inputText = inputText.replace(/<[^>]*>?/gm, '');
     setText(inputText);
     setWords(inputText.split(' ').filter((word) => word !== ''));
@@ -81,8 +86,14 @@ const WordCarousel: React.FC = () => {
   return (
     <>
       <Navbar />
+      <Text fontSize="3xl" fontWeight="bold">
+            {"Pomagalec branja besedila"}
+      </Text>
       <div className="carousel-container">
         <div className="edditable" contentEditable={!running.current} onInput={handleInputChange}></div>
+        <div className='input-text' style={{position: 'absolute', top: '18%', left: '50%', transform: 'translateX(-50%)'}}>
+        <span style={{opacity:0.5}}>Vpisi besedilo</span>
+        </div>
         <div className="carousel-display">
           {words.length > 0 && words.map((word, index) => (
             <span

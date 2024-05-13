@@ -118,6 +118,11 @@ div.edditable {
   border: 1px solid #ccc;
   outline: none; /* Optional: remove the default focus outline */
 }
+.edditable:focus + .input-text {
+  /* styles to apply when .input is in focus */
+  display: none;
+}
+
 strong {
 font-weight: bold;
 }
