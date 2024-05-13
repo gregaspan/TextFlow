@@ -7,7 +7,7 @@ import {
   Text,
   Textarea,
   useColorModeValue,
-  Flex
+  Flex,
 } from "@chakra-ui/react";
 import Chat from "./components/Chat";
 import TextSimplification from "./components/textSimplification";
@@ -18,22 +18,23 @@ import ClickableText from "./components/ClickableText";
 import Footer from "./components/Footer";
 
 export default function TextInputFlow() {
-  const [text, setText] = useState('');
+  const [text, setText] = useState("");
   const bg = useColorModeValue("white", "gray.800");
   const colorScheme = useColorModeValue("blue", "orange");
 
-  const handleTextChange = (e: { target: { value: React.SetStateAction<string>; }; }) => setText(e.target.value);
+  const handleTextChange = (e: {
+    target: { value: React.SetStateAction<string> };
+  }) => setText(e.target.value);
 
   return (
     <>
       <Header />
       <VStack spacing={5} p={5} align="stretch">
-        <Flex direction={['column', 'column', 'row']} p={5} align="stretch">
+        <Flex direction={["column", "column", "row"]} p={5} align="stretch">
           <VStack spacing={5} flex="3" p={5} align="stretch">
-
-          <Text fontSize="3xl" fontWeight="bold">
-            {"Vnesite besedilo"}
-          </Text>
+            <Text fontSize="3xl" fontWeight="bold">
+              {"Vnesite besedilo"}
+            </Text>
 
             <Input
               value={text}
@@ -45,18 +46,14 @@ export default function TextInputFlow() {
               <ClickableText text={text} />
             </div>
             <Chat text={text} />
+            <Box flex="1" p={5} bg={bg} boxShadow="lg" borderRadius="lg">
+              <TextToSpeech text={text} />
+            </Box>
           </VStack>
-
-            
-          
         </Flex>
         <Box flex="1" p={5} bg={bg} boxShadow="lg" borderRadius="lg">
-          <TextSimplification initialText={text}/>
+          <TextSimplification initialText={text} />
         </Box>
-        <Box flex="1" p={5} bg={bg} boxShadow="lg" borderRadius="lg">
-          <TextToSpeech text={text} />
-        </Box>
-
       </VStack>
       <Footer />
     </>
