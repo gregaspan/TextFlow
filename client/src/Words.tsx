@@ -10,6 +10,7 @@ function App() {
   const [header, setHeader] = useState("");
   const [definition, setDefinition] = useState("");
   const [fullEntry, setFullEntry] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleInputChange = (event: {
     target: { value: React.SetStateAction<string> };
@@ -18,6 +19,7 @@ function App() {
   };
 
   const fetchAllData = async () => {
+    setIsLoading(true);
     const apiUrl = `http://127.0.0.1:8080/api`;
     try {
       const [detailsResponse, imageResponse] = await Promise.all([
@@ -35,6 +37,8 @@ function App() {
       }
     } catch (error) {
       console.error("Error fetching data:", error);
+    }finally {
+      setIsLoading(false);
     }
   };
 
@@ -61,7 +65,7 @@ function App() {
             value={word}
             onChange={handleInputChange}
           />
-          <Button colorScheme="blue" onClick={fetchAllData}>
+          <Button colorScheme="blue" onClick={fetchAllData} isLoading={isLoading} loadingText="Searching...">
             Search
           </Button>
         </Flex>

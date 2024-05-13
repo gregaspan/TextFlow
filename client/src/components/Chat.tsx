@@ -64,35 +64,35 @@ const ChatDrawer: React.FC<ChatProps> = ({ text }) => {
   return (
     <>
       <Button onClick={toggleDrawer} colorScheme={colorScheme}>
-        Open Chat
+        Odpri Chat
       </Button>
       <Drawer isOpen={isOpen} placement="right" onClose={toggleDrawer}>
         <DrawerOverlay />
         <DrawerContent>
           <DrawerCloseButton />
-          <DrawerHeader>Ask a question!</DrawerHeader>
+          <DrawerHeader>Vnsei vprašanje!</DrawerHeader>
           <DrawerBody>
             <VStack spacing={4}>
               <Input
                 value={question}
                 onChange={handleQuestionChange}
-                placeholder="Enter your question..."
+                placeholder="Vnesi vprašanje..."
                 focusBorderColor={colorScheme}
               />
               <Button
                 colorScheme={colorScheme}
                 onClick={handleSubmit}
                 isLoading={isLoading}
-                loadingText="Submitting..."
+                loadingText="Vnašanje..."
               >
-                Submit
+                Vnesi
               </Button>
-              <Textarea value={response} placeholder="Response will appear here..." isReadOnly />
+              <Textarea value={response} placeholder="Tukaj bo odgovor..." isReadOnly />
             </VStack>
           </DrawerBody>
           <DrawerFooter>
             <Button variant="outline" mr={3} onClick={toggleDrawer}>
-              Close
+              Zapri
             </Button>
           </DrawerFooter>
         </DrawerContent>

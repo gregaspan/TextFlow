@@ -23,6 +23,7 @@ const ClickableText: React.FC<ClickableTextProps> = ({ text }) => {
     const [loading, setLoading] = useState(false);
 
     const fetchAllData = async (word: String) => {
+        setLoading(true);
         const apiUrl = `http://127.0.0.1:8080/api`;
         const formattedWord = word.replace(/[^a-zA-Z]/g, '');
 
@@ -38,8 +39,9 @@ const ClickableText: React.FC<ClickableTextProps> = ({ text }) => {
             setDefinition(detailsResponse.data.definicija);
           }
     
-          if (imageResponse.data.image_url) {
-            setImage(imageResponse.data.image_url);
+          if (imageResponse.data) {
+            if(imageResponse.data.image_url == "No image found") setImage('');
+            else setImage(imageResponse.data.image_url);
           }
           if (synonymsResponse.data.synonyms) {
             var synonymsText = synonymsResponse.data.synonyms[0];
@@ -74,15 +76,17 @@ const ClickableText: React.FC<ClickableTextProps> = ({ text }) => {
                     <PopoverContent>
                     <PopoverArrow />
                     <PopoverCloseButton />
-                    <PopoverContent>Loading...</PopoverContent>
+                    <br/>
+                    {!loading && <p>Loading...</p>}
                      <PopoverBody>{synonyms}</PopoverBody>
                      <PopoverHeader>{definition}</PopoverHeader>
+                     {image && 
                      <Image
                         src={image || "https://ralfvanveen.com/wp-content/uploads/2021/06/Placeholder-_-Glossary.svg"}
                         boxSize="300px"
                         borderRadius="full"
                         mb={4}
-                    />
+                    />}
                     </PopoverContent>
                 </Popover>
                 </>
