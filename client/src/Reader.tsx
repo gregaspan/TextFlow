@@ -90,7 +90,7 @@ const WordCarousel: React.FC = () => {
             {"Pomagalec branja besedila"}
       </Text>
       <div className="carousel-container">
-        <div className="edditable" contentEditable={!running.current} onInput={handleInputChange}></div>
+        <div className="edditable" contentEditable={!running.current} onInput={handleInputChange}>{text}</div>
         <div className='input-text' style={{position: 'absolute', top: '18%', left: '50%', transform: 'translateX(-50%)'}}>
         <span style={{opacity:0.5}}>Vpisi besedilo</span>
         </div>
