@@ -10,7 +10,7 @@ import {
   Textarea,
   useColorModeValue,
   Icon,
-  Flex,
+  Flex
 } from "@chakra-ui/react";
 import { Search2Icon } from "@chakra-ui/icons";
 import axios from "axios";
@@ -22,11 +22,11 @@ import SpeachToText from "./components/SpeachToText";
 import ClickableText from './components/ClickableText';
 import Footer from "./components/Footer";
 
+
 export default function Scraper() {
   const [url, setUrl] = useState('');
   const [data, setData] = useState({ naslov: '', povzetek: '', vsebina_clanka: '', tags: '' });
   const [isLoading, setIsLoading] = useState(false);
-  const [image, setImage] = useState("");
 
   const handleUrlChange = (e: { target: { value: React.SetStateAction<string>; }; }) => setUrl(e.target.value);
 
@@ -43,27 +43,9 @@ export default function Scraper() {
     }
   };
 
-  const fetchAllData = async (word: String) => {
-    const apiUrl = `http://127.0.0.1:8080/api`;
-    try {
-      const [detailsResponse, imageResponse] = await Promise.all([
-        axios.get(`${apiUrl}/sskj`, { params: { word } }),
-        axios.get(`${apiUrl}/image`, { params: { word } }),
-      ]);
-
-      if (imageResponse.data.image_url) {
-        setImage(imageResponse.data.image_url);
-      }
-    } catch (error) {
-      console.error("Error fetching data:", error);
-    }
-  };
-
-
   // Styles
   const bg = useColorModeValue("white", "gray.800");
   const colorScheme = useColorModeValue("blue", "orange");
-
 
   return (
     <>
@@ -86,9 +68,7 @@ export default function Scraper() {
             <Text fontWeight="bold" fontSize="lg">Summary:</Text>
             <Text mb={2}>{data.povzetek}</Text>
             <Text fontWeight="bold" fontSize="lg">Content:</Text>
-            <div className="edditable" style={{ width: "100%" }}>
-              <ClickableText text={data.vsebina_clanka} />
-            </div>
+            <Textarea value={data.vsebina_clanka} isReadOnly />
             <Text fontWeight="bold" fontSize="lg">Tags:</Text>
             <Text>{data.tags}</Text>
           </Box>

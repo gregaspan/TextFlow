@@ -97,7 +97,7 @@ export default function InputText({ initialText }: InputTextProps) {
                 style={{ width: 0, height: 0, opacity: 0 }}
             />
 
-            <Button onClick={submitTextForProcessing} colorScheme={bg} mb={4} isLoading={loading} loadingText="Scraping...">
+            <Button onClick={submitTextForProcessing} colorScheme={bg} mb={4} isLoading={loading} loadingText="Poenostavljanje...">
                 Poenostavi
             </Button>
 
