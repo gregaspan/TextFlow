@@ -17,6 +17,7 @@ import axios from "axios";
 import Chat from "./components/Chat";
 import TextSimplification from "./components/textSimplification"
 import TextToSpeech from "./components/TextToSpeach"
+import Header from "./components/Navbar";
 
 export default function Scraper() {
   const [url, setUrl] = useState('');
@@ -43,6 +44,8 @@ export default function Scraper() {
   const colorScheme = useColorModeValue("blue", "orange");
 
   return (
+    <>
+    <Header />
     <VStack spacing={5} p={5} align="stretch">
       <Flex direction={['column', 'column', 'row']} p={5} align="stretch">
         <VStack spacing={5} flex="3" p={5} align="stretch" overflow="auto">
@@ -79,5 +82,6 @@ export default function Scraper() {
         <TextToSpeech text={data.vsebina_clanka} />
       </Box>
     </VStack>
+    </>
   );
 }
