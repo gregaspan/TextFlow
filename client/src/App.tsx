@@ -9,6 +9,7 @@ import Reader from "./Reader";
 import Landing from "./Landing";
 import SignIn from "./components/SignIn";
 import TextInputFlow from './TextInputFlow';
+import Transcript from './Transcript';
 
 function App() {
   const [activeTabIndex, setActiveTabIndex] = useState(0);
@@ -25,6 +26,8 @@ function App() {
           <Route path="/words" element={<Words />} />
           <Route path="/about" element={<About />} />
           <Route path="/signin" element={<SignIn />} />
+          <Route path="/transcript" element={<Transcript />} />
+
 
         </Routes>
       </BrowserRouter>
