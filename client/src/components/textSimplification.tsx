@@ -1,14 +1,23 @@
-import { Textarea, Text, RadioGroup, Stack, Radio, Button, Spinner, Card, CardHeader, CardBody, Container } from '@chakra-ui/react';
-import React, { useState } from 'react';
+import { Textarea, Text, RadioGroup, Stack, Radio, Button, Card, CardHeader, CardBody, Container } from '@chakra-ui/react';
+import React, { useEffect, useState } from 'react';
 
-export default function InputText() {
-    const [inputText, setInputText] = useState('');
+interface InputTextProps {
+    initialText: string; // Define a prop to receive initial text
+}
+
+export default function InputText({ initialText }: InputTextProps) {
     const [simplificationLevel, setSimplificationLevel] = useState('basic');
     //const [simplifiedText, setSimplifiedText] = useState<string | null>(null);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
     const [message, setMessages] = useState<string[]>([]);
+    const [inputText, setInputText] = useState(initialText);
 
+
+    useEffect(() => {
+        setInputText(initialText); // Update inputText when initialText changes
+    }, [initialText]);
+    
     // Handle text input changes
     const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
         setInputText(e.target.value);
@@ -84,6 +93,7 @@ export default function InputText() {
                 placeholder='Vnesi text za poenostavitev'
                 size='sm'
                 mb={4}
+                style={{ width: 0, height: 0, opacity: 0 }}
             />
 
             <Button onClick={submitTextForProcessing} colorScheme='blue' mb={4} isLoading={loading} loadingText="Scraping...">

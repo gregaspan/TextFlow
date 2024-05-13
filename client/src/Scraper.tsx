@@ -77,7 +77,7 @@ export default function Scraper() {
 
       </Flex>
       <Box flex="1" p={5} bg={bg} boxShadow="lg" borderRadius="lg">
-        <TextSimplification />
+        <TextSimplification initialText={data.vsebina_clanka} />
       </Box>
       <Box flex="1" p={5} bg={bg} boxShadow="lg" borderRadius="lg">
         <TextToSpeech text={data.vsebina_clanka} />
