@@ -31,6 +31,12 @@ export default function TextInputFlow() {
   return (
     <>
       <Navbar />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
       <Box flex="1" p={5} bg={bg} boxShadow="lg" borderRadius="lg">
         <SpeachToText />
       </Box>
