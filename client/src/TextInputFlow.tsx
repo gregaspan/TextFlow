@@ -50,9 +50,7 @@ export default function TextInputFlow() {
         <Box flex="1" p={5} bg={bg} boxShadow="lg" borderRadius="lg">
           <TextToSpeech text={text} />
         </Box>
-        <Box flex="1" p={5} bg={bg} boxShadow="lg" borderRadius="lg">
-          <SpeechToText />
-        </Box>
+
       </VStack>
     </>
   );

@@ -104,9 +104,6 @@ export default function Scraper() {
       <Box flex="1" p={5} bg={bg} boxShadow="lg" borderRadius="lg">
         <TextToSpeech text={data.vsebina_clanka} />
       </Box>
-      <Box flex="1" p={5} bg={bg} boxShadow="lg" borderRadius="lg">
-        <SpeachToText />
-      </Box>
     </VStack>
     <Footer />
     </>
