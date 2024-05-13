@@ -124,3 +124,8 @@ font-weight: bold;
 .button-icon {
   font-size: 240px;
 }
+/* Logo.module.css */
+.logo {
+  width: 100px;
+  height: auto;
+}
