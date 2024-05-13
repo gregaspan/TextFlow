@@ -70,10 +70,10 @@ export default function Scraper() {
             <Text fontWeight="bold" fontSize="lg">Tags:</Text>
             <Text>{data.tags}</Text>
           </Box>
-        </VStack>
-        <Box flex="1" p={5} bg={bg} boxShadow="lg" borderRadius="lg">
+
           <Chat text={data.vsebina_clanka} />
-        </Box>
+        </VStack>
+        
 
       </Flex>
       <Box flex="1" p={5} bg={bg} boxShadow="lg" borderRadius="lg">
