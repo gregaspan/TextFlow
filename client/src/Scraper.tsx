@@ -68,7 +68,9 @@ export default function Scraper() {
             <Text fontWeight="bold" fontSize="lg">Summary:</Text>
             <Text mb={2}>{data.povzetek}</Text>
             <Text fontWeight="bold" fontSize="lg">Content:</Text>
-            <Textarea value={data.vsebina_clanka} isReadOnly />
+            <div className="edditable" style={{ width: "100%" }}>
+            <ClickableText text={data.vsebina_clanka}/>
+            </div>
             <Text fontWeight="bold" fontSize="lg">Tags:</Text>
             <Text>{data.tags}</Text>
           </Box>
