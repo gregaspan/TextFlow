@@ -113,10 +113,6 @@ div.edditable {
   padding: 5px;
   margin-bottom: 20px;
   overflow: scroll;
-<<<<<<< Updated upstream
-=======
-  
->>>>>>> Stashed changes
 }
 .edditable:focus {
   border: 1px solid #ccc;
@@ -128,13 +124,11 @@ font-weight: bold;
 .button-icon {
   font-size: 240px;
 }
-<<<<<<< Updated upstream
 /* Logo.module.css */
 .logo {
   width: 100px;
   height: auto;
 }
-=======
 .clickable-word {
   cursor: pointer;
   display: inline-block;
@@ -149,4 +143,3 @@ font-weight: bold;
   background-color: #e0e0e0;
   border-color: #b0b0b0;
 }
->>>>>>> Stashed changes
