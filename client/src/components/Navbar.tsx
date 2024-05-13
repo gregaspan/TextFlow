@@ -253,6 +253,10 @@ const NAV_ITEMS: Array<NavItem> = [
     href: '/scraper',
   },
   {
+    label: 'TextInputFlow',
+    href: '/TextInputFlow',
+  },
+  {
     label: 'Words',
     href: '/words',
   },

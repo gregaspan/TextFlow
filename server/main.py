@@ -13,8 +13,8 @@ import os
 app = Flask(__name__)
 cors = CORS(app, origins='*')
 
-KEY = "zu-23f971dd13e55bf7d161d94a5d46840b"
-VOICERSS_TTS_KEY = "862fba3703124c5d9cfd410aff494ae5"
+KEY = "zu-a3482e6ed88b38af358d064805358962"
+VOICERSS_TTS_KEY = "087cb2c2f68944969386601abed14abd"
 
 ASSEMLBLYAI_STT_KEY = "c6d1e28d398741a7a45554a6fd1d0139"
 X_RAPIDAPI_KEY = "1d9f8aa758msh0f2f642becf4515p1bfb89jsnf70f64195fe4"
@@ -39,7 +39,11 @@ def chat():
     question = data.get('question')
     text = data.get('text')
 
+    #print("TEXTTTTTT", text)
+    #print("VPRASANJEEEE", question)
+
     #question = "Kaj je glavno mesto Slovenije?" 
+
     client = OpenAI(
     api_key=KEY,
     base_url="https://zukijourney.xyzbot.net/v1"
@@ -52,11 +56,11 @@ def chat():
         messages=[
         {
             "role": "user",
-            "content": f"Odgovori na to vprasanje:\n {question} \n iz teka besedila: \n {text} Odgovori kar se da kratko in jedernato.",
+            "content": f"Odgovori na to vprasanje:\n {question} \n iz tega besedila: \n {text} Odgovori kar se da kratko in jedernato in v slovenskem jeziku.",
         },
     ],
     )
-    print("Tukajjjjjjjjj", chat_completion.json())
+    #print("Tukajjjjjjjjj", chat_completion.json())
     return jsonify(chat_completion.json())
 
 @app.route('/api/simplify', methods=['POST'])
@@ -65,6 +69,10 @@ def simplify_text():
     data = request.json
     text = data.get('text')
     level = data.get('level')
+
+    print(text)
+    print(level)
+
 
     client = OpenAI(
     api_key=KEY,
@@ -91,6 +99,8 @@ def tts():
     data = request.json
     text = data.get('text')
 
+    print(text)
+
     url = "https://voicerss-text-to-speech.p.rapidapi.com/"
     querystring = {
         "key": VOICERSS_TTS_KEY,
@@ -116,11 +126,27 @@ def tts():
 @app.route('/api/stt', methods=['GET', 'POST'])
 def stt():
 
-    transcript_text = ""
+    data = request.json
+    url = data.get('mp3_url')
+
+    aai.settings.api_key = ASSEMLBLYAI_STT_KEY
+    #FILE_URL = "https://github.com/AssemblyAI-Examples/audio-examples/raw/main/20230607_me_canadian_wildfires.mp3"
+
+    transcriber = aai.Transcriber()
+    transcript = transcriber.transcribe(url)
+
+    translated = GoogleTranslator(source='en', target='sl').translate(transcript.text)
+    
+    transcript_text = transcript.get_text() if hasattr(transcript, 'get_text') else "No text available"
+    return jsonify({"transcript": transcript.text, "slo_verzija": translated})
+
+    '''
+transcript_text = ""
     translated = ""
+    
     aai.settings.api_key = ASSEMLBLYAI_STT_KEY
 
-    if request.method == 'POST':
+    if request.method == 'GET':
         if 'file' in request.files:
             file = request.files['file']
             if file and file.filename.endswith('.mp3'):
@@ -134,23 +160,14 @@ def stt():
         elif 'file_url' in request.form:
             file_url = request.form['file_url']
             transcriber = aai.Transcriber()
-            transcript = transcriber.transcribe(file_url)
+            #transcript = transcriber.transcribe(file_url)
+            transcript = transcriber.transcribe("https://github.com/AssemblyAI-Examples/audio-examples/raw/main/20230607_me_canadian_wildfires.mp3")
             transcript_text = transcript.get_text() if hasattr(transcript, 'get_text') else "No text available"
     else:
         return jsonify({"error": "Invalid request method"}), 405
 
     translated = GoogleTranslator(source='en', target='sl').translate(transcript.text)
     return jsonify({"transcript": transcript_text, "slovene_version": translated})
-    '''
-    FILE_URL = "https://github.com/AssemblyAI-Examples/audio-examples/raw/main/20230607_me_canadian_wildfires.mp3"
-
-    transcriber = aai.Transcriber()
-    transcript = transcriber.transcribe(FILE_URL)
-
-    translated = GoogleTranslator(source='en', target='sl').translate(transcript.text)
-    
-    transcript_text = transcript.get_text() if hasattr(transcript, 'get_text') else "No text available"
-    return jsonify({"transcript": transcript.text, "slov verzija": translated})
     '''
 
 @app.route('/api/dictionary', methods=["GET", "POST"])
