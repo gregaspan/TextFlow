@@ -112,6 +112,7 @@ div.edditable {
   border: 1px solid #ccc;
   padding: 5px;
   margin-bottom: 20px;
+  overflow: scroll;
 }
 .edditable:focus {
   border: 1px solid #ccc;
