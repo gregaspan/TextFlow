@@ -170,11 +170,10 @@ transcript_text = ""
     return jsonify({"transcript": transcript_text, "slovene_version": translated})
     '''
 
-@app.route('/api/dictionary', methods=["GET", "POST"])
+@app.route('/api/synonyms', methods=["GET", "POST"])
 def dictionary():
 
-    data = request.json
-    word = data.get('word')
+    word = request.args.get('word', '')
     translated = GoogleTranslator(source='sl', target='en').translate(word) 
 
     url = f"https://api.api-ninjas.com/v1/thesaurus?word={translated}"
@@ -184,10 +183,12 @@ def dictionary():
     }
 
     neke = requests.get(url, headers=headers).json()["synonyms"]
+    print(translated)
     temp = []
-    for i in range(5):
-        #temp.append(GoogleTranslator(source='sl', target='en').translate(neke[i]))
-        temp.append(neke[i])
+    if len(neke) > 5:
+        for i in range(5):
+            temp.append(GoogleTranslator(source='en', target='sl').translate(neke[i]))
+            #temp.append(neke[i])
 
     return jsonify({
         "original_word": word,
