@@ -52,7 +52,7 @@ def chat():
         messages=[
         {
             "role": "user",
-            "content": f"Odgovori na to vprasanje:\n {question} \n iz teka besedila: \n {text} Odgovori kar se da kratko in jedernato in v slovenskem jeziku.",
+            "content": f"Odgovori na to vprasanje:\n {question} \n iz tega besedila: \n {text} Odgovori v slovenskem jeziku kar se da kratko in jedernato.",
         },
     ],
     )
