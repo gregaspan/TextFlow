@@ -22,14 +22,13 @@ export default function WithLargeQuote() {
       <Box textAlign={"center"}>
         <Avatar
           src={
-            "https://images.unsplash.com/photo-1586297135537-94bc9ba060aa?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80"
-          }
+"https://images.unsplash.com/photo-1715041432689-71f41dad0187?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTg3fHxib3l8ZW58MHx8Mnx8fDA%3D"          }
           mb={2}
         />
 
         <Text fontWeight={600}>Tim</Text>
         <Text fontSize={"sm"} color={useColorModeValue("gray.400", "gray.400")}>
-            10 let
+          10 let
         </Text>
       </Box>
     </Stack>
