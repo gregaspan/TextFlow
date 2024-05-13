@@ -9,6 +9,7 @@ import {
     PopoverCloseButton,
     PopoverHeader,
     Image,
+    Spinner,
   } from '@chakra-ui/react';
   import axios from "axios";
 
@@ -38,7 +39,7 @@ const ClickableText: React.FC<ClickableTextProps> = ({ text }) => {
           if (detailsResponse.data) {
             setDefinition(detailsResponse.data.definicija);
           }
-    
+          console.log(imageResponse.data);
           if (imageResponse.data) {
             if(imageResponse.data.image_url == "No image found") setImage('');
             else setImage(imageResponse.data.image_url);
@@ -77,16 +78,28 @@ const ClickableText: React.FC<ClickableTextProps> = ({ text }) => {
                     <PopoverArrow />
                     <PopoverCloseButton />
                     <br/>
-                    {!loading && <p>Loading...</p>}
-                     <PopoverBody>{synonyms}</PopoverBody>
-                     <PopoverHeader>{definition}</PopoverHeader>
-                     {image && 
-                     <Image
-                        src={image || "https://ralfvanveen.com/wp-content/uploads/2021/06/Placeholder-_-Glossary.svg"}
-                        boxSize="300px"
-                        borderRadius="full"
-                        mb={4}
-                    />}
+                    {loading ? (
+                                <Spinner
+                                    thickness='4px'
+                                    speed='0.65s'
+                                    emptyColor='gray.200'
+                                    color='blue.500'
+                                    size='xl'
+                                />
+                            ) : (
+                                <>
+                                    <PopoverHeader>{definition}</PopoverHeader>
+                                    <PopoverBody>{synonyms}</PopoverBody>
+                                    {image && 
+                                        <Image
+                                            src={image}
+                                            boxSize="300px"
+                                            borderRadius="full"
+                                            mb={4}
+                                        />
+                                    }
+                                </>
+                            )}
                     </PopoverContent>
                 </Popover>
                 </>
