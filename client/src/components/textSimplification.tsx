@@ -1,4 +1,4 @@
-import { Textarea, Text, RadioGroup, Stack, Radio, Button, Card, CardHeader, CardBody, Container,useColorModeValue, Box } from '@chakra-ui/react';
+import { Textarea, Text, RadioGroup, Stack, Radio, Button, Card, CardHeader, CardBody, Container, useColorModeValue, Box } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
 
 interface InputTextProps {
@@ -18,7 +18,7 @@ export default function InputText({ initialText }: InputTextProps) {
     useEffect(() => {
         setInputText(initialText); // Update inputText when initialText changes
     }, [initialText]);
-    
+
     // Handle text input changes
     const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
         setInputText(e.target.value);
@@ -62,7 +62,7 @@ export default function InputText({ initialText }: InputTextProps) {
 
             const data = JSON.parse(text);
             const data1 = JSON.parse(data);
-            console.log(typeof(data1))
+            console.log(typeof (data1))
             const messageContent = data1.choices[0].message.content;
             setMessages(messageContent);
 
@@ -78,21 +78,21 @@ export default function InputText({ initialText }: InputTextProps) {
             {error ? (
                 <Text color='red.500'>{error}</Text>
             ) : (
-                
+
                 <Text fontSize="3xl" fontWeight="bold">
-            Izberi nivo poenostavitve:
-          </Text>
+                    Izberi nivo poenostavitve:
+                </Text>
             )}
             <Box display="flex" justifyContent="center" alignItems="center" width="100%">
-      <RadioGroup value={simplificationLevel} onChange={handleLevelChange} mb={6}>
-        <Stack direction="row" spacing={5}>
-          <Radio value="malo poenostavljeno">malo poenostavljeno</Radio>
-          <Radio value="bolj poenostavljeno">bolj poenostavljeno</Radio>
-          <Radio value="zelo poenostavljeno">zelo poenostavljeno</Radio>
-        </Stack>
-      </RadioGroup>
-    </Box>
-
+                <RadioGroup value={simplificationLevel} onChange={handleLevelChange} mb={6}>
+                    <Stack direction="row" spacing={5}>
+                        <Radio value="malo poenostavljeno">malo poenostavljeno</Radio>
+                        <Radio value="bolj poenostavljeno">bolj poenostavljeno</Radio>
+                        <Radio value="zelo poenostavljeno">zelo poenostavljeno</Radio>
+                    </Stack>
+                </RadioGroup>
+            </Box>
+        
             <Textarea
                 value={inputText}
                 onChange={handleInputChange}

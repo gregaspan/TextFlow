@@ -10,7 +10,7 @@ import {
   Textarea,
   useColorModeValue,
   Icon,
-  Flex,
+  Flex
 } from "@chakra-ui/react";
 import { Search2Icon } from "@chakra-ui/icons";
 import axios from "axios";
@@ -110,17 +110,19 @@ export default function Scraper() {
               </Text>
               <Text>{data.tags}</Text>
             </Box>
-
             <Chat text={data.vsebina_clanka} />
+
             <Box flex="1" p={5} bg={bg} boxShadow="lg" borderRadius="lg">
               <TextToSpeech text={data.vsebina_clanka} />
             </Box>
+            <Box height="2px" width="full" bgGradient="linear(to-r, gray.900, white)" opacity="0.6" my={6} boxShadow="sm"/>
           </VStack>
         </Flex>
         <Box flex="1" p={5} bg={bg} boxShadow="lg" borderRadius="lg">
           <TextSimplification initialText={data.vsebina_clanka} />
         </Box>
       </VStack>
+      <Box height="2px" width="full" bgGradient="linear(to-r, gray.900, white)" opacity="0.6" my={6} boxShadow="sm"/>
       <Footer />
     </>
   );
