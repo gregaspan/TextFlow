@@ -66,7 +66,7 @@ const SpeachToText = () => {
     return (
         <VStack spacing={4} width="100%">
             <Input
-                placeholder="Enter MP3 URL..."
+                placeholder="Vnesi MP3 povezavo..."
                 value={mp3Url}
                 onChange={handleMp3UrlChange}
                 focusBorderColor={colorScheme}
@@ -75,21 +75,21 @@ const SpeachToText = () => {
                 colorScheme={colorScheme}
                 onClick={handleSubmit}
                 isLoading={isLoading}
-                loadingText="Processing..."
+                loadingText="Procesiranje..."
             >
                 Prevedi
             </Button>
             {isTranslated && (
         <>
           <Box p="4" boxShadow="md" borderRadius="md" w="full">
-            <Text fontSize="md" mb="2" fontWeight="bold">Translated:</Text>
+            <Text fontSize="md" mb="2" fontWeight="bold">Prevedeno:</Text>
             <Text>{translated}</Text>
           </Box>
           <Button
             colorScheme={colorScheme}
             onClick={handleNavigate}
           >
-            Go to Reader
+            Preberi
           </Button>
         </>
       )}
