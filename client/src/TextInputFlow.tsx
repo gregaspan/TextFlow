@@ -36,10 +36,11 @@ export default function TextInputFlow() {
               focusBorderColor={colorScheme}
             />
             <Textarea value={text} isReadOnly />
-          </VStack>
-          <Box flex="1" p={5} bg={bg} boxShadow="lg" borderRadius="lg">
             <Chat text={text} />
-          </Box>
+          </VStack>
+
+            
+          
         </Flex>
         <Box flex="1" p={5} bg={bg} boxShadow="lg" borderRadius="lg">
           <TextSimplification initialText={text}/>

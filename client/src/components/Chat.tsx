@@ -33,6 +33,8 @@ const ChatDrawer: React.FC<ChatProps> = ({ text }) => {
   const handleOpen = () => setIsOpen(true);  // Function to open the drawer
   const handleClose = () => setIsOpen(false);  // Function to close the drawer
 
+  const toggleDrawer = () => setIsOpen(!isOpen);
+
   // Handles changes to the question input
   const handleQuestionChange = (e: { target: { value: React.SetStateAction<string>; }; }) => setQuestion(e.target.value);
 
@@ -61,14 +63,16 @@ const ChatDrawer: React.FC<ChatProps> = ({ text }) => {
 
   return (
     <>
-      <Button onClick={handleOpen}>Open Chat</Button>
-      <Drawer isOpen={isOpen} placement="right" onClose={handleClose}>
+      <Button onClick={toggleDrawer} colorScheme={colorScheme}>
+        Open Chat
+      </Button>
+      <Drawer isOpen={isOpen} placement="right" onClose={toggleDrawer}>
         <DrawerOverlay />
         <DrawerContent>
           <DrawerCloseButton />
           <DrawerHeader>Ask a question!</DrawerHeader>
           <DrawerBody>
-            <VStack spacing={4} width="100%">
+            <VStack spacing={4}>
               <Input
                 value={question}
                 onChange={handleQuestionChange}
@@ -87,7 +91,7 @@ const ChatDrawer: React.FC<ChatProps> = ({ text }) => {
             </VStack>
           </DrawerBody>
           <DrawerFooter>
-            <Button variant="outline" mr={3} onClick={handleClose}>
+            <Button variant="outline" mr={3} onClick={toggleDrawer}>
               Close
             </Button>
           </DrawerFooter>
