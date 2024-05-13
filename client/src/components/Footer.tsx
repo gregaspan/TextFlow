@@ -11,6 +11,7 @@ import {
 } from '@chakra-ui/react'
 import { FaInstagram, FaTwitter, FaYoutube } from 'react-icons/fa'
 import { ReactNode } from 'react'
+import Logor from '../Logo'
 
 const Logo = (props: any) => {
   return (
@@ -70,23 +71,25 @@ export default function SmallCentered() {
         spacing={4}
         justify={'center'}
         align={'center'}>
-        <Logo />
+        <Logor />
         <Stack direction={'row'} spacing={6}>
-          <Box as="a" href={'#'}>
+          <Box as="a" href={'/'}>
             Home
           </Box>
-          <Box as="a" href={'#'}>
-            About
+          <Box as="a" href={'/scraper'}>
+          TextFlow
           </Box>
-          <Box as="a" href={'#'}>
-            Blog
+          <Box as="a" href={'/TextInputFlow'}>
+          TextInputFlow
           </Box>
-          <Box as="a" href={'#'}>
-            Contact
+          <Box as="a" href={'/words'}>
+          Words
+          </Box>
+          <Box as="a" href={'/reader'}>
+          Reader
           </Box>
         </Stack>
       </Container>
-
       <Box
         borderTopWidth={1}
         borderStyle={'solid'}
@@ -99,7 +102,7 @@ export default function SmallCentered() {
           spacing={4}
           justify={{ base: 'center', md: 'space-between' }}
           align={{ base: 'center', md: 'center' }}>
-          <Text>© 2022 Chakra Templates. All rights reserved</Text>
+          <Text>© 2024 TextFlow. All rights reserved</Text>
           <Stack direction={'row'} spacing={6}>
             <SocialButton label={'Twitter'} href={'#'}>
               <FaTwitter />
