@@ -91,10 +91,9 @@ export default function Scraper() {
               borderRadius="lg"
               overflow="hidden"
             >
-              <Text fontWeight="bold" fontSize="lg">
-                Title:
+              <Text fontSize="3xl" fontWeight="bold">
+                {data.naslov || "Title"}
               </Text>
-              <Text mb={2}>{data.naslov}</Text>
               <Text fontWeight="bold" fontSize="lg">
                 Summary:
               </Text>
