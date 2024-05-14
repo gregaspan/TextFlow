@@ -237,6 +237,12 @@ def scrape24ur():
         vsebina_clanka = soup.find_all('div', attrs={"class": "article__content no_page_break cf"})
         tags = soup.find_all('a', attrs={"class": "article__tag_name"})
     
+    elif "podatki.gov.si" in domain:
+        naslov = soup.find_all('h2', attrs={"class": "node-title"})
+        povzetek = ""
+        vsebina_clanka = soup.find_all('div', attrs={"class": "field-item even"})
+        tags = ""
+    
     vsa_vsebina = ""
     for vsebina in vsebina_clanka:
         vsa_vsebina = vsa_vsebina + vsebina.text

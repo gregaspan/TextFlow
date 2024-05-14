@@ -96,7 +96,7 @@ export default function Scraper() {
               </Text>
               <br />
               <Text fontWeight="bold" fontSize="lg">
-              {data.povzetek || "Tu bo prikazan povzetek besedila"}
+              {data.povzetek}
               </Text>
               <br />
               <div className="edditable" style={{ width: "100%" }}>
