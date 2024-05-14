@@ -51,9 +51,12 @@ export default function TextInputFlow() {
             </Box>
           </VStack>
         </Flex>
+        <Box height="2px" width="full" bgGradient="linear(to-r, gray.900, white)" opacity="0.6" my={6} boxShadow="sm"/>
+        <br/>
         <Box flex="1" p={5} bg={bg} boxShadow="lg" borderRadius="lg">
           <TextSimplification initialText={text} />
         </Box>
+        <Box height="2px" width="full" bgGradient="linear(to-r, gray.900, white)" opacity="0.6" my={6} boxShadow="sm"/>
       </VStack>
       <Footer />
     </>
