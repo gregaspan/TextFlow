@@ -86,13 +86,15 @@ const WordCarousel: React.FC = () => {
   return (
     <>
       <Navbar />
+      <br />
+
       <Text fontSize="3xl" fontWeight="bold">
-            {"Beri Hitreje!"}
+            {"Pomocnik za hitro branje📚"}
       </Text>
       <div className="carousel-container">
         <div className="edditable" contentEditable={!running.current} onInput={handleInputChange}>{text}</div>
         <div className='input-text' style={{position: 'absolute', top: '18%', left: '50%', transform: 'translateX(-50%)'}}>
-        <span style={{opacity:0.5}}>Vpisi besedilo</span>
+        <span style={{opacity:0.5}}>Vpisi besedilo in izberi hitrost branja!</span>
         </div>
         <div className="carousel-display">
           {words.length > 0 && words.map((word, index) => (
