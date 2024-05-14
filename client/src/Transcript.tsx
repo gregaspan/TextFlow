@@ -32,8 +32,10 @@ export default function TextInputFlow() {
     <>
       <Navbar />
       <br />
-      <br />
-      <br />
+
+      <Text fontSize="3xl" fontWeight="bold">
+            {"Pretvori govor v besedilo💬"}
+      </Text>     
       <br />
       <br />
       <br />
