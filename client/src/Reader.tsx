@@ -87,7 +87,7 @@ const WordCarousel: React.FC = () => {
     <>
       <Navbar />
       <Text fontSize="3xl" fontWeight="bold">
-            {"Pomagalec branja besedila"}
+            {"Beri Hitreje!"}
       </Text>
       <div className="carousel-container">
         <div className="edditable" contentEditable={!running.current} onInput={handleInputChange}>{text}</div>
