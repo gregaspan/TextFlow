@@ -262,8 +262,4 @@ const NAV_ITEMS: Array<NavItem> = [
     label: 'Reader',
     href: '/reader',
   },
-  {
-    label: 'Transcript',
-    href: '/transcript',
-  },
 ]
