@@ -32,6 +32,8 @@ const WordCarousel: React.FC = () => {
     if (location.state && location.state.text) {
       setText(location.state.text);  // Set text from navigation state
       setWords(location.state.text.split(' ').filter((word: string) => word !== ''));
+      const wordElements = document.getElementsByClassName("input-text")[0] as HTMLDivElement;
+      wordElements.style.display = 'none';
     }
   }, [location]);
 
@@ -70,7 +72,6 @@ const WordCarousel: React.FC = () => {
     }
 
   }
-
   useEffect(() => {
     const timer = setInterval(() => {
       if (running.current) {
@@ -93,8 +94,8 @@ const WordCarousel: React.FC = () => {
       </Text>
       <div className="carousel-container">
         <div className="edditable" contentEditable={!running.current} onInput={handleInputChange}>{text}</div>
-        <div className='input-text' style={{position: 'absolute', top: '18%', left: '50%', transform: 'translateX(-50%)'}}>
-        <span style={{opacity:0.5}}>Vpisi besedilo in izberi hitrost branja!</span>
+        <div className='input-text' style={{position: 'absolute', top: '21.5%', left: '50%', transform: 'translateX(-50%)'}}>
+        <span style={{opacity:0.5}}>"Vpisi besedilo in izberi hitrost branja!"</span>
         </div>
         <div className="carousel-display">
           {words.length > 0 && words.map((word, index) => (
@@ -156,9 +157,6 @@ const WordCarousel: React.FC = () => {
       <br />
       <br />
       <br />
-      <br />
-      <br /><br />
-      <br /><br /><br /><br /><br /><br /><br /><br /><br />
       <Footer />
     </>
   );
