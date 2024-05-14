@@ -90,6 +90,8 @@ export default function InputText({ initialText }: InputTextProps) {
                 </Text>
             )}
             <br />
+            <br />
+
             <Slider defaultValue={sliderValue} min={0} max={20} step={10.5} onChange={changeSliderValue}>
             <SliderTrack bg={bg_slider}>
             <SliderFilledTrack bg={bg} />
