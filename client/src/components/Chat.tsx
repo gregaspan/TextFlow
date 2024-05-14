@@ -59,7 +59,7 @@ const ChatDrawer: React.FC<ChatProps> = ({ text }) => {
     }
   };
 
-  const colorScheme = useColorModeValue("blue", "orange");  // Dynamic color scheme based on theme
+  const colorScheme = useColorModeValue("blue", "blue");  // Dynamic color scheme based on theme
 
   return (
     <>

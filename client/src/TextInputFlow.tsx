@@ -20,7 +20,7 @@ import Footer from "./components/Footer";
 export default function TextInputFlow() {
   const [text, setText] = useState("");
   const bg = useColorModeValue("white", "gray.800");
-  const colorScheme = useColorModeValue("blue", "orange");
+  const colorScheme = useColorModeValue("blue", "blue");
 
   const handleTextChange = (e: {
     target: { value: React.SetStateAction<string> };

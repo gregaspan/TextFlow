@@ -53,7 +53,7 @@ const TextToSpeech: React.FC<TextToSpeechProps> = ({ text }) => {
     }
   };
 
-  const colorScheme = useColorModeValue("blue", "orange");
+  const colorScheme = useColorModeValue("blue", "blue");
 
   return (
     <VStack spacing={4} width="100%">
