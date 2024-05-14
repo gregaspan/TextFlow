@@ -53,7 +53,7 @@ export default function Scraper() {
 
   // Styles
   const bg = useColorModeValue("white", "gray.800");
-  const colorScheme = useColorModeValue("blue", "orange");
+  const colorScheme = useColorModeValue("blue", "blue");
 
   return (
     <>

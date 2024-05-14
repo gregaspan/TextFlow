@@ -13,8 +13,8 @@ import os
 app = Flask(__name__)
 cors = CORS(app, origins='*')
 
-KEY = "zu-23f971dd13e55bf7d161d94a5d46840b"
-VOICERSS_TTS_KEY = "087cb2c2f68944969386601abed14abd"
+KEY = "zu-29009cff53b15e7d4c0e92e4456a81ec"
+VOICERSS_TTS_KEY = "6a9559b71d9b4b9683fcf0b15dfe298f"
 
 ASSEMLBLYAI_STT_KEY = "c6d1e28d398741a7a45554a6fd1d0139"
 X_RAPIDAPI_KEY = "1d9f8aa758msh0f2f642becf4515p1bfb89jsnf70f64195fe4"
@@ -85,7 +85,7 @@ def simplify_text():
         messages=[
         {
             "role": "user",
-            "content": f"You are a master at making articles easier to understand. You never lose context and you always answer with a clearly readable, summarized article. Zelo poenostavljeno = Concise, Bolj Poenostavljeno = Easy, and Malo poenostavljeno = Normal. Make article more readable on {level} level. This is the article: {text}. Answer in SLOVENIAN language. Answer in one sentence.",
+            "content": f"poenostavi to besedilo:{text} gledena zahtevano težavnost:{level} ",
         },
     ],
     )
