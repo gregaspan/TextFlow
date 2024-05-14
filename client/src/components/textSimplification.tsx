@@ -1,4 +1,8 @@
-import { Textarea, Text, RadioGroup, Stack, Radio, Button, Card, CardHeader, CardBody, Container, useColorModeValue, Box } from '@chakra-ui/react';
+import { Textarea, Text, RadioGroup, Stack, Radio, Button, Card, CardHeader, CardBody, Container, useColorModeValue, Box,  Slider,
+    SliderTrack,
+    SliderFilledTrack,
+    SliderThumb,
+    SliderMark, } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
 
 interface InputTextProps {
@@ -6,13 +10,15 @@ interface InputTextProps {
 }
 
 export default function InputText({ initialText }: InputTextProps) {
-    const [simplificationLevel, setSimplificationLevel] = useState('basic');
+    const [simplificationLevel, setSimplificationLevel] = useState('malo poenostavljeno');
     //const [simplifiedText, setSimplifiedText] = useState<string | null>(null);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
     const [message, setMessages] = useState<string[]>([]);
     const [inputText, setInputText] = useState(initialText);
+    const [sliderValue, setSliderValue] = useState(0)
     const bg = useColorModeValue('blue', 'orange')
+    const bg_slider = useColorModeValue('gray.300', 'white')
 
 
     useEffect(() => {
@@ -83,15 +89,22 @@ export default function InputText({ initialText }: InputTextProps) {
                     Izberi nivo poenostavitve:
                 </Text>
             )}
-            <Box display="flex" justifyContent="center" alignItems="center" width="100%">
-                <RadioGroup value={simplificationLevel} onChange={handleLevelChange} mb={6}>
-                    <Stack direction="row" spacing={5}>
-                        <Radio value="malo poenostavljeno">malo poenostavljeno</Radio>
-                        <Radio value="bolj poenostavljeno">bolj poenostavljeno</Radio>
-                        <Radio value="zelo poenostavljeno">zelo poenostavljeno</Radio>
-                    </Stack>
-                </RadioGroup>
-            </Box>
+            <br />
+            <Slider defaultValue={sliderValue} min={0} max={20} step={10.5} onChange={changeSliderValue}>
+            <SliderTrack bg={bg_slider}>
+            <SliderFilledTrack bg={bg} />
+            </SliderTrack>
+            <SliderThumb boxSize={6} />
+            <SliderMark value={0} mt='1' ml='-2.5' fontSize='sm'>
+                original
+            </SliderMark>
+            <SliderMark value={10} mt='1' ml='-2.5' fontSize='sm'>
+                srednje
+            </SliderMark>
+            <SliderMark value={20} mt='1' ml='-2.5' fontSize='sm'>
+                zelo
+            </SliderMark>
+            </Slider>
         
             <Textarea
                 value={inputText}
@@ -101,6 +114,8 @@ export default function InputText({ initialText }: InputTextProps) {
                 mb={4}
                 style={{ width: 0, height: 0, opacity: 0 }}
             />
+
+            <br />
 
             <Button onClick={submitTextForProcessing} colorScheme={bg} mb={4} isLoading={loading} loadingText="Poenostavljanje...">
                 Poenostavi
@@ -122,4 +137,11 @@ export default function InputText({ initialText }: InputTextProps) {
             </Card>
         </Container>
     );
+    function changeSliderValue(val: number) {
+        console.log(val)
+        if(val == 0) setSimplificationLevel("malo poenostavljeno")
+        else if(val == 10.5) setSimplificationLevel("bolj poenostavljeno")
+        else setSimplificationLevel("zelo poenostavljeno")
+        setSliderValue(val)
+    }
 }

@@ -92,22 +92,17 @@ export default function Scraper() {
               overflow="hidden"
             >
               <Text fontSize="3xl" fontWeight="bold">
-                {data.naslov || "Title"}
+                {data.naslov || "Tu bo prikazan naslov"}
               </Text>
+              <br />
               <Text fontWeight="bold" fontSize="lg">
-                Summary:
+              {data.povzetek || "Tu bo prikazan povzetek besedila"}
               </Text>
-              <Text mb={2}>{data.povzetek}</Text>
-              <Text fontWeight="bold" fontSize="lg">
-                Content:
-              </Text>
+              <br />
               <div className="edditable" style={{ width: "100%" }}>
                 <ClickableText text={data.vsebina_clanka} />
               </div>
-              <Text fontWeight="bold" fontSize="lg">
-                Tags:
-              </Text>
-              <Text>{data.tags}</Text>
+              <Text fontWeight="bold" fontSize="lg">{data.tags}</Text>
             </Box>
             <Chat text={data.vsebina_clanka} />
 
