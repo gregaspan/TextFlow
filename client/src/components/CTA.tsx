@@ -26,7 +26,7 @@ export default function CallToActionWithAnnotation() {
             lineHeight={"110%"}
           >
             Read Better With <br />
-            <Text as={"span"} color={"green.400"}>
+            <Text as={"span"} color={"blue.500"}>
               TextFlow✅
             </Text>
           </Heading>
