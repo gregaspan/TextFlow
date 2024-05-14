@@ -76,10 +76,10 @@ export default function WithSubnavigation() {
             fontSize={'sm'}
             fontWeight={600}
             color={'white'}
-            bg={'pink.400'}
+            bg={'blue.400'}
             href={'https://gozenforms.com/3XcCLycZXs5N5HdMqZbC'}
             _hover={{
-              bg: 'pink.300',
+              bg: 'blue.300',
             }}>
             Sign Up
           </Button>
