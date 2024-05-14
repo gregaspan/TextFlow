@@ -17,7 +17,7 @@ export default function InputText({ initialText }: InputTextProps) {
     const [message, setMessages] = useState<string[]>([]);
     const [inputText, setInputText] = useState(initialText);
     const [sliderValue, setSliderValue] = useState(0)
-    const bg = useColorModeValue('blue', 'orange')
+    const bg = useColorModeValue('blue', 'blue')
     const bg_slider = useColorModeValue('gray.300', 'white')
 
 
