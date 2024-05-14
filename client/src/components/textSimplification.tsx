@@ -89,6 +89,7 @@ export default function InputText({ initialText }: InputTextProps) {
                     Izberi nivo poenostavitve:
                 </Text>
             )}
+            <br />
             <Slider defaultValue={sliderValue} min={0} max={20} step={10.5} onChange={changeSliderValue}>
             <SliderTrack bg={bg_slider}>
             <SliderFilledTrack bg={bg} />
@@ -113,6 +114,8 @@ export default function InputText({ initialText }: InputTextProps) {
                 mb={4}
                 style={{ width: 0, height: 0, opacity: 0 }}
             />
+
+            <br />
 
             <Button onClick={submitTextForProcessing} colorScheme={bg} mb={4} isLoading={loading} loadingText="Poenostavljanje...">
                 Poenostavi

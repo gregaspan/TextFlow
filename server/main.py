@@ -13,7 +13,7 @@ import os
 app = Flask(__name__)
 cors = CORS(app, origins='*')
 
-KEY = "zu-29009cff53b15e7d4c0e92e4456a81ec"
+KEY = "zu-23f971dd13e55bf7d161d94a5d46840b"
 VOICERSS_TTS_KEY = "087cb2c2f68944969386601abed14abd"
 
 ASSEMLBLYAI_STT_KEY = "c6d1e28d398741a7a45554a6fd1d0139"
