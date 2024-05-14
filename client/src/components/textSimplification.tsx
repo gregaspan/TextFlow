@@ -98,7 +98,7 @@ export default function InputText({ initialText }: InputTextProps) {
             </SliderTrack>
             <SliderThumb boxSize={6} />
             <SliderMark value={0} mt='1' ml='-2.5' fontSize='sm'>
-                original
+                malo
             </SliderMark>
             <SliderMark value={10} mt='1' ml='-2.5' fontSize='sm'>
                 srednje
