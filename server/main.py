@@ -13,7 +13,7 @@ import os
 app = Flask(__name__)
 cors = CORS(app, origins='*')
 
-KEY = "zu-a3482e6ed88b38af358d064805358962"
+KEY = "zu-29009cff53b15e7d4c0e92e4456a81ec"
 VOICERSS_TTS_KEY = "087cb2c2f68944969386601abed14abd"
 
 ASSEMLBLYAI_STT_KEY = "c6d1e28d398741a7a45554a6fd1d0139"
@@ -38,7 +38,6 @@ def chat():
     data = request.json
     question = data.get('question')
     text = data.get('text')
-
     #print("TEXTTTTTT", text)
     #print("VPRASANJEEEE", question)
 
