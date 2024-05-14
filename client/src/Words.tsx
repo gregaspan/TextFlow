@@ -48,7 +48,7 @@ function App() {
       <Flex direction="column" align="center" justify="center" p={5}>
         <Box textAlign="center" mb={4}>
           <Text fontSize="3xl" fontWeight="bold">
-            {header || "Vnesite besedo"}
+            {header || "Vnesite besedo📖"}
           </Text>
           <Text fontSize="md">{definition || ""}</Text>
           <Text fontSize="sm">{fullEntry || "Definicija bo podana tukaj"}</Text>
